@@ -1,0 +1,21 @@
+@extends('layouts.app')
+@section('content')
+    <div class="container">
+
+    </div>
+    <div class="container">
+        <h1>Customer List</h1>
+        <div class="container; table-responsive">
+            <div class="row">
+            <a href="{{ route('customer.create') }}" class="btn btn-success">Customer Create</a>
+                <div class="col-md-6" style="display:flex">
+
+                    {!! $dataTable->table() !!}
+                    {!! $dataTable->scripts() !!}
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+@endsection
