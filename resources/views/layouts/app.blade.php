@@ -46,7 +46,7 @@
                             {{ config('customer.datatables', 'Customers') }}
                         </a>
 
-                        <a class="navbar-brand" href="{{ url('datatables/product') }}">
+                        <a class="navbar-brand" href="{{ route('product.index') }}">
                             {{ config('product.datatables', 'Products') }}
                         </a>
 
