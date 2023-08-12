@@ -21,3 +21,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::resource('category', App\Http\Controllers\CategoryController::class);
 Route::resource('product', App\Http\Controllers\ProductController::class);
 Route::post('/product/images', [App\Http\Controllers\ProductController::class, 'storeMedia'])->name('products.storeMedia');
+Route::post('/category/images', [App\Http\Controllers\CategoryController::class, 'storeMedia'])->name('category.storeMedia');
