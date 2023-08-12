@@ -25,9 +25,6 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-<<<<<<< HEAD
-Route::view('/category', 'category.index')->name('category.index');
-=======
 Route::get('/user', [App\Http\Controllers\UserController::class, 'index'])->name('user.index');
 Route::get('/customer', [App\Http\Controllers\CustomerController::class, 'index'])->name('customer.index');
 // Route::get('/product', [App\Http\Controllers\ProductController::class, 'index'])->name('product.index'); // product
@@ -66,4 +63,3 @@ Route::get('/datatables/category', [DatatableController::class, 'categoryDatatab
 Route::get('/delete/customer{id}', [CustomerController::class, 'customerDelete'])->name('customer.delete');
 // Route::get('/delete/product{id}', [ProductController::class, 'productDelete'])->name('product.delete'); // product
 Route::get('/delete/category{id}', [CategoryController::class, 'categoryDelete'])->name('category.delete');
->>>>>>> 8aa5ab19ab93189b38a32830cee99582ec897c69
