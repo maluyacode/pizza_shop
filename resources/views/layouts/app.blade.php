@@ -56,7 +56,7 @@
 
 
                     <!-- Right Side Of Navbar -->
-                    <ul class="navbar-nav ms-auto" style="gap: 10px">
+                    <ul class="navbar-nav ms-auto" style="gap: 10px; align-items:center">
                         <!-- Authentication Links -->
                         @guest
                             @if (Route::has('login'))
@@ -71,7 +71,7 @@
                                 </li>
                             @endif
                         @else
-                            <div class="dropdown show">
+                            <div class="dropdown show" style="height: fit-content;">
                                 <a class="btn btn-light dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
                                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     Management
@@ -81,7 +81,7 @@
                                     <a class="dropdown-item" href="{{ route('product.index') }}">Manage Product</a>
                                     <a class="dropdown-item" href="{{ url('/category') }}">Manage Category</a>
                                     <a class="dropdown-item" href="{{ route('user.index') }}">Manage User</a>
-                                    <a class="dropdown-item" href="{{ route('payment.index')}}">Manage Payment</a>
+                                    <a class="dropdown-item" href="{{ route('payment.index') }}">Manage Payment</a>
                                 </div>
                             </div>
                             <li class="nav-item dropdown">
@@ -89,7 +89,8 @@
                                     role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
                                     v-pre>
                                     {{-- {{ Auth::user()->name }} --}}
-                                    <img src="{{ asset('/storage/images/profilePic.jpg') }}" style="width: 30px; border-radius: 50%;">
+                                    <img src="{{ asset('/storage/images/profilePic.jpg') }}"
+                                        style="width: 40px; border-radius: 50%;">
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
