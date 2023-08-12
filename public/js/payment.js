@@ -1,11 +1,11 @@
 let table;
 $(function () {
-    // $("#categoryForm").validate({
-    //     rules: {
-    //         name: "required",
-    //         detail: "required",
-    //     },
-    // });
+    $("#paymentForm").validate({
+        rules: {
+            name: "required",
+            description: "required",
+        },
+    });
     table = $("#paymentTable").DataTable({
         ajax: {
             url: "/api/payment",
@@ -90,7 +90,7 @@ $(document).on("click", ".edit", function (e) {
 });
 
 $("#save").on("click", function (e) {
-    // if ($("#paymentForm").valid()) {
+    if ($("#paymentForm").valid()) {
         let formData = new FormData($("#paymentForm")[0]);
     for (var pair of formData.entries()) {
         console.log(pair[0] + ", " + pair[1]);
@@ -113,10 +113,11 @@ $("#save").on("click", function (e) {
             },
             error: function (error) { },
         });
-    // }
+    }
 });
 
 $("#update").on('click', function () {
+    if ($("#paymentForm").valid()) {
     let id = $(this).attr("data-id");
     let formData = new FormData($('#paymentForm')[0]);
     for (var pair of formData.entries()) {
@@ -140,6 +141,7 @@ $("#update").on('click', function () {
         },
         error: function (error) { },
     })
+}
 });
 
 $(document).on("click", ".delete", function (e) {

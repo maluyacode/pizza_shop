@@ -50,7 +50,7 @@
                                 name="detail">
                         </div>
                         <div class="form-group">
-                            <label for="detail">Image</label>
+                            <label id="ldetail" for="detail">Image</label>
                             <div class="dropzone" id="dropzone-image"></div>
                         </div>
                 </div>
