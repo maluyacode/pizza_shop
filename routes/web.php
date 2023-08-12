@@ -28,7 +28,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::get('/user', [App\Http\Controllers\UserController::class, 'index'])->name('user.index');
 Route::get('/customer', [App\Http\Controllers\CustomerController::class, 'index'])->name('customer.index');
 Route::get('/product', [App\Http\Controllers\ProductController::class, 'index'])->name('product.index');
-Route::get('/category', [App\Http\Controllers\CategoryController::class, 'index'])->name('category.index');
+Route::view('/category', 'category.index')->name('category.index');
 
 //create
 Route::get('/customer/create', [App\Http\Controllers\CustomerController::class, 'create'])->name('customer.create');
