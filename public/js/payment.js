@@ -90,11 +90,13 @@ $(document).on("click", ".edit", function (e) {
 });
 
 $("#save").on("click", function (e) {
-    if ($("#categoryForm").valid()) {
-        let formData = new FormData($("#categoryForm")[0]);
-
+    // if ($("#paymentForm").valid()) {
+        let formData = new FormData($("#paymentForm")[0]);
+    for (var pair of formData.entries()) {
+        console.log(pair[0] + ", " + pair[1]);
+    }
         $.ajax({
-            url: "/api/category",
+            url: "/api/payment",
             type: "POST",
             data: formData,
             contentType: false,
@@ -104,10 +106,12 @@ $("#save").on("click", function (e) {
             },
             dataType: "json",
             success: function (data) {
-                $("#modalCategory").modal("hide");
+                // $("#modalCategory").modal("hide");
+                $("#close").trigger("click");
                 table.ajax.reload();
+                alert("Payment Added")
             },
             error: function (error) { },
         });
-    }
+    // }
 });

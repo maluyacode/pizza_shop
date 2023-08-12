@@ -103,8 +103,9 @@ $("#save").on("click", function (e) {
             },
             dataType: "json",
             success: function (data) {
-                $("#modalCategory").modal("hide");
+                $("#close").trigger("click");
                 table.ajax.reload();
+                alert("Category Added")
             },
             error: function (error) { },
         });
@@ -129,8 +130,9 @@ $("#update").on('click', function () {
         },
         dataType: "json",
         success: function (data) {
-            $("#modalCategory").modal("hide");
+            $("#close").trigger("click");
             table.ajax.reload();
+            alert("Category Edited")
         },
         error: function (error) { },
     })
@@ -148,6 +150,7 @@ $(document).on("click", ".delete", function (e) {
         dataType: "json",
         success: function (data) {
             table.ajax.reload();
+            alert("Deleted Success")
         },
         error: function (error) {
             alert(error);
