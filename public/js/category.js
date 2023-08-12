@@ -90,25 +90,25 @@ $(document).on("click", ".edit", function (e) {
 
 $("#save").on("click", function (e) {
     if ($("#categoryForm").valid()) {
-    let formData = new FormData($("#categoryForm")[0]);
+        let formData = new FormData($("#categoryForm")[0]);
 
-    $.ajax({
-        url: "/api/category",
-        type: "POST",
-        data: formData,
-        contentType: false,
-        processData: false,
-        headers: {
-            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
-        },
-        dataType: "json",
-        success: function (data) {
-            $("#modalCategory").modal("hide");
-            table.ajax.reload();
-        },
-        error: function (error) {},
-    });
-}
+        $.ajax({
+            url: "/api/category",
+            type: "POST",
+            data: formData,
+            contentType: false,
+            processData: false,
+            headers: {
+                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+            },
+            dataType: "json",
+            success: function (data) {
+                $("#modalCategory").modal("hide");
+                table.ajax.reload();
+            },
+            error: function (error) { },
+        });
+    }
 });
 
 $("#update").on('click', function () {
@@ -132,7 +132,7 @@ $("#update").on('click', function () {
             $("#modalCategory").modal("hide");
             table.ajax.reload();
         },
-        error: function (error) {},
+        error: function (error) { },
     })
 });
 

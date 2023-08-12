@@ -43,10 +43,10 @@ let table = $('#product-table').DataTable({
         {
             data: null,
             render: function (data) {
-                return `<div class="action-buttons"><button type="button" data-toggle="modal" data-target="#productModal" data-id="${data.id}" class="btn btn-primary btn-sm edit">
+                return `<div class="action-buttons"><button type="button" data-toggle="modal" data-target="#productModal" data-id="${data.id}" class="btn btn-primary edit">
                             Edit
                         </button>
-                        <button type="button" data-id="${data.id}" class="btn btn-danger btn-sm delete">
+                        <button type="button" data-id="${data.id}" class="btn btn-danger delete">
                             Delete
                         </button>
                         </div>`;
@@ -61,7 +61,7 @@ $(function () {
     $('.buttons-create').attr({
         "data-toggle": "modal",
         "data-target": "#productModal",
-    }).addClass('btn-sm');
+    }).addClass('btn-success');
 
     validator = $('#productForm').validate({
         rules: {

@@ -46,18 +46,14 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav me-auto">
-                        <a class="navbar-brand" href="{{ url('datatables/customer') }}">
-                            {{ config('customer.datatables', 'Customers') }}
-                        </a>
-
-                        <a class="navbar-brand" href="{{ route('product.index') }}">
-                            {{ config('product.datatables', 'Products') }}
-                        </a>
-
-                        <a class="navbar-brand" href="{{ url('/category') }}">
-                            {{ config('category.index', 'Categories') }}
-                        </a>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">{{ __('Products') }}</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">{{ __('Cart') }}</a>
+                        </li>
                     </ul>
+
 
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ms-auto">
@@ -75,8 +71,21 @@
                                 </li>
                             @endif
                         @else
+                            <div class="dropdown show">
+                                <a class="btn dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Management
+                                </a>
+
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                    <a class="dropdown-item" href="{{ route('product.index') }}">Manage Product</a>
+                                    <a class="dropdown-item" href="{{ url('/category') }}">Manage Category</a>
+                                    <a class="dropdown-item" href="{{ route('user.index') }}">Manage User</a>
+                                    <a class="dropdown-item" href="#">Manage Payment</a>
+                                </div>
+                            </div>
                             <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="{{ route('logout') }}"
+                                <a id="navbarDropdown" class="btn nav-link dropdown-toggle" href="{{ route('logout') }}"
                                     role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
                                     v-pre>
                                     {{ Auth::user()->name }}
