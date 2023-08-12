@@ -1,6 +1,6 @@
 .model-image {
-    width: 150px;
-    height: 150px;
+    width: 100px;
+    height: 100px;
 }
 
 .action-buttons {
@@ -20,7 +20,8 @@
 
 #product-table {
     padding-top: 10px;
-    table-layout: fixed !important;
+    /* table-layout: fixed !important; */
+    width: 100%;
 }
 
 #product-table thead tr th {
@@ -48,6 +49,11 @@
 #product-table td {
     text-transform: capitalize;
     border-bottom: 1px solid #464444 !important;
+}
+
+#product-table thead tr th {
+    padding: 0;
+    min-width: 120px;
 }
 
 #productForm .form-group {

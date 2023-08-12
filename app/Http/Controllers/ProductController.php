@@ -7,12 +7,13 @@ use Illuminate\Http\Request;
 use App\Models\Product;
 use Barryvdh\Debugbar\Facades\Debugbar;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\DB;
 
 class ProductController extends Controller
 {
     public function index()
     {
-        $products = Product::with(['category'])->get();
+        $products = Product::with(['category', 'media'])->get();
         return response()->json($products);
     }
 
@@ -23,9 +24,30 @@ class ProductController extends Controller
         return response()->json($categories);
     }
 
-    public function update()
-    {
-        return view('product.update');
+    public function update(Request $request, $id)
+    {;
+        // $request->validate([
+        //     'name' => 'required',
+        //     'price' => 'required',
+        //     'detail' => 'required',
+        //     'img_path' => 'required'
+        // ]);
+        Debugbar::info($request, $id);
+        $product = Product::find($id);
+        $product->name = $request->name;
+        $product->price = $request->price;
+        $product->detail = $request->detail;
+        $product->category_id = $request->category_id;
+        $product->img_path = 'Wala na po';
+        if ($request->document !== null) {
+            DB::table('media')->where('model_type', 'App\Model\Product')->where('model_id', $id)->delete();
+            foreach ($request->input("document", []) as $file) {
+                $product->addMedia(storage_path("product/images/" . $file))->toMediaCollection("images");
+            }
+        }
+        $product->save();
+
+        return response()->json($product);
     }
 
     public function storeMedia(Request $request)
@@ -46,10 +68,13 @@ class ProductController extends Controller
         // unlink($path);
     }
 
-    public function productEdit($id)
+    public function edit($id)
     {
-        $product = Product::find($id);
-        return view('product.edit', compact('product'));
+        Debugbar::info($id);
+        $product = Product::with(['category'])->find($id);
+        $categories = Category::whereNotIn('id', [$product->category_id])->pluck('name', 'id');
+
+        return response()->json(['product' => $product, 'categories' => $categories]);
     }
 
     public function store(Request $request)
@@ -77,29 +102,10 @@ class ProductController extends Controller
         return response()->json($product);
     }
 
-    public function productUpdate(Request $request, $id)
+    public function destroy($id)
     {
-        $product = product::find($id);
-        $request->validate([
-            'name' => 'required',
-            'price' => 'required',
-            'detail' => 'required',
-            'img_path' => 'required'
-        ]);
-
-        $product->name = $request->name;
-        $product->price = $request->price;
-        $product->detail = $request->detail;
-        $product->img_path = $request->img_path;
-        $product->save();
-
-        return redirect()->route('product.datatable');
-    }
-
-    public function productDelete($id)
-    {
-        $product = Product::find($id);
-        $product->delete();
-        return redirect('datatables/product');
+        Product::destroy($id);
+        DB::table('media')->where('model_type', 'App\Model\Product')->where('model_id', $id)->delete();
+        return response()->json([]);
     }
 }

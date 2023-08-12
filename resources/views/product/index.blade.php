@@ -9,6 +9,7 @@
         href="https://cdn.datatables.net/responsive/2.2.9/css/responsive.dataTables.min.css">
     <script type="text/javascript" src="https://cdn.datatables.net/responsive/2.2.9/js/dataTables.responsive.min.js">
     </script>
+
 @endsection
 
 @section('content')
@@ -140,4 +141,5 @@
     <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.6.5/js/buttons.bootstrap4.min.js"></script>
     <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
     <script src="{{ asset('js/product.js') }}"></script>
+
 @endsection
