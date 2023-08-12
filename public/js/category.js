@@ -46,12 +46,13 @@ $(function () {
                     </button>
                 </div>`;
                 },
+
             },
         ],
     });
 
     $(
-        `<button class="btn btn-primary" role="button" aria-disabled="true" id="create" data-toggle="modal" data-target="#modalCategory">Add Category</button>`
+        `<button class="btn btn-primary" role="button" aria-disabled="true" id="create" data-toggle="modal" data-target="#exampleModalCenter">Add Category</button>`
     ).insertBefore("#categoryTable_filter");
 });
 
