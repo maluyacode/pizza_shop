@@ -25,21 +25,15 @@ let table = $('#product-table').DataTable({
             data: 'category.name'
         },
         {
-            data: 'licensed_no'
+            data: 'price'
         },
         {
-            data: 'description'
-        },
-        {
-            data: 'address'
-        },
-        {
-            data: 'driver_status'
+            data: 'detail'
         },
         {
             data: null,
             render: function (data) {
-                return `<img class="model-image" src="${data.media[0]?.original_url}" alt="NONE">`
+                return `<img class="model-image" src="/storage/images/1688311767_card-1.jpg" alt="NONE">`
             },
             class: "data-image",
 
@@ -61,3 +55,7 @@ let table = $('#product-table').DataTable({
         }
     ]
 });
+
+function createButton() {
+
+}
