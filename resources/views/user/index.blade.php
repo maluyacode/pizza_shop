@@ -55,8 +55,8 @@
                         </div>
                         <div class="form-group">
                             <label for="adress">User Address</label>
-                            <input type="text" class="form-control" id="adress" placeholder="Enter user address"
-                                name="adress">
+                            <input type="text" class="form-control" id="address" placeholder="Enter user address"
+                                name="address">
                         </div>
                         <div class="form-group">
                             <label for="email">User Email</label>
@@ -72,7 +72,7 @@
                             </select>
                         </div>
                         <div class="form-group">
-                            <label for="password">User Password</label>
+                            <label class="label-password" for="password">User Password</label>
                             <input type="password" class="form-control" id="password" placeholder="Enter user password"
                                 name="password">
                         </div>
@@ -96,7 +96,7 @@
 
         function initilizeDropzone() {
             Dropzone.options.dropzoneImage = {
-                url: '{{ route('products.storeMedia') }}',
+                url: '{{ route('user.storeMedia') }}',
                 // maxFilesize: 2,
                 // acceptedFiles: 'image/*',
                 addRemoveLinks: true,
