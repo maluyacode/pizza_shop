@@ -41,16 +41,13 @@ let table = $('#product-table').DataTable({
         {
             data: null,
             render: function (data) {
-                return `<div class="action-buttons"><button type="button" data-toggle="modal" data-target="#ourModal" data-id="${data.id}" class="btn btn-primary edit">
-            <i class="bi bi-pencil-square"></i>
-                </button>
-                <button type="button" data-id="${data.id}" class="btn btn-danger btn-delete delete">
-                    <i class="bi bi-trash3" style="color:white"></i>
-                </button>
-                <button type="button" data-id="${data.id}" class="btn btn-warning btn-delete view" data-toggle="modal" data-target="#imagesModal">
-                    <i class="bi bi-eye" style="color:white"></i>
-                </button>
-            </div>`;
+                return `<div class="action-buttons"><button type="button" data-toggle="modal" data-target="#productModal" data-id="${data.id}" class="btn btn-primary edit">
+                            Edit
+                        </button>
+                        <button type="button" data-id="${data.id}" class="btn btn-danger delete">
+                            Delete
+                        </button>
+                        </div>`;
             }
         }
     ]
@@ -59,6 +56,6 @@ let table = $('#product-table').DataTable({
 function createButton() {
     $('.buttons-create').attr({
         "data-toggle": "modal",
-        "data-target": "productModal",
+        "data-target": "#productModal",
     });
 }
