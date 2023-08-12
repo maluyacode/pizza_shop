@@ -48,13 +48,11 @@ class CategoryController extends Controller
         $category->img_path = "Edited Default";
         $category->save();
         return response()->json($category);
-        // return view('category.update');
     }
 
     public function destroy($id)
     {
         Category::destroy($id);
-        // return back();
         return response()->json([]);
     }
 

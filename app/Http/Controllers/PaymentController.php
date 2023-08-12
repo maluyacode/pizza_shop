@@ -54,7 +54,8 @@ class PaymentController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $payment = Payment::find($id);
+        return response()->json($payment);
     }
 
     /**
@@ -62,7 +63,11 @@ class PaymentController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $payment = Payment::find($id);
+        $payment->name = $request->name;
+        $payment->description = $request->description;
+        $payment->save();
+        return response()->json($payment);
     }
 
     /**
@@ -70,7 +75,8 @@ class PaymentController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        Payment::destroy($id);
+        return response()->json([]);
     }
 
     public function storeMedia(Request $request)
