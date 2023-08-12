@@ -28,3 +28,4 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::view('/category', 'category.index')->name('category.index');
 Route::view('/product/index', 'product.index')->name('product.index');
 Route::view('/user/index', 'user.index')->name('user.index');
+Route::view('/payment/index', 'payment.index')->name('payment.index');
