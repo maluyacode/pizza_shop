@@ -24,8 +24,9 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\CategoryController::class, 'categories'])->name('home');
-Route::get('/product/all', [App\Http\Controllers\FrontEndController::class, 'ViewAllProduct'])->name('ViewAllProduct');
+Route::get('/home', [App\Http\Controllers\FrontEndController::class, 'categories'])->name('home');
+Route::get('/product/{id}/all', [App\Http\Controllers\FrontEndController::class, 'ViewAllProduct'])->name('ViewAllProduct');
+Route::get('/product/{id}/details', [App\Http\Controllers\FrontEndController::class, 'product'])->name('product.details');
 Route::view('/category', 'category.index')->name('category.index');
 Route::view('/product/index', 'product.index')->name('product.index');
 Route::view('/user/index', 'user.index')->name('user.index');

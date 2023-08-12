@@ -1,0 +1,10 @@
+.left-col img {
+    max-height: 400px;
+    min-width: 400px;
+    object-fit: cover;
+}
+
+.card-title {
+    display: flex;
+    justify-content: space-between;
+}

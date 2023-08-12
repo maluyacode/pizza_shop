@@ -9,8 +9,22 @@ use Illuminate\Support\Facades\View;
 
 class FrontEndController extends Controller
 {
-    public function ViewAllProduct(){
-        $product = Product::with('media')->get();
-        return View::make('viewProduct', compact('product'));
+
+    public function categories()
+    {
+        return View::make('home', ['categories' => Category::with(['media'])->get()]);
+    }
+
+    public function ViewAllProduct($id)
+    {
+        $category = Category::find($id);
+        $products = Product::with('media')->where('category_id', $id)->get();
+
+        return View::make('viewProduct', compact('products', 'category'));
+    }
+
+    public function product($id)
+    {
+        return View::make('product-details', ['product' => Product::with('media')->find($id)]);
     }
 }

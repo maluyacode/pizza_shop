@@ -3,21 +3,29 @@
     <link rel="stylesheet" href="{{ asset('css/home.css') }}">
 @endsection
 @section('content')
-
     <div class="container-fluid">
-
+        <div class="row justify-content-center title">
+            <h1>{{ $category->name }}</h1>
+        </div>
         <div class="row justify-content-center">
-            @foreach($product as $products)
-            <div class="card col-md-4">
-                <img class="card-img-top" src="" alt="Card image cap">
-                <div class="card-body">
-                    <h5 class="card-title">{{$products->name}}</h5>
-                    <p class="card-text">{{$products->detail}}</p>
+            @foreach ($products as $product)
+                <div class="card col-md-4">
+                    @if (count($product->media) > 0)
+                        <img class="card-img-top" src="{{ $product->media[0]->original_url }}" alt="Card image cap">
+                    @else
+                        <img class="card-img-top" src="{{ asset('storage/images/profilePic.jpg') }}" alt="Card image cap">
+                    @endif
+                    <div class="card-body">
+                        <h5 class="card-title" style="display:flex;justify-content:space-between; ">
+                            <span>{{ $product->name }}</span><span>&#8369;{{ $product->price }}</span>
+                        </h5>
+                        <p class="card-text">{{ $product->detail }}</p>
+                    </div>
+                    <div class="card-footer" style="display:flex;justify-content:space-between; ">
+                        <button class="btn btn-dark">Add to Cart</button>
+                        <a href="{{ route('product.details', $product->id) }}" class="btn btn-dark">Quick View</a>
+                    </div>
                 </div>
-                <div class="card-footer">
-                    <button class="btn btn-dark">View</button>
-                </div>
-            </div>
             @endforeach
         </div>
     </div>
