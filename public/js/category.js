@@ -38,7 +38,6 @@ $(function () {
             {
                 data: null,
                 render: function (data) {
-                    // console.log(data.name);
                     return `<div class="action-buttons"><button type="button" data-toggle="modal" data-target="#modalCU" data-id="${data.id}" class="btn btn-primary edit">
                 <i class="bi bi-pencil-square"></i>
                     </button>
@@ -51,7 +50,10 @@ $(function () {
         ],
     });
 
-    // $(
-    //     `<button class="btn btn-primary" role="button" aria-disabled="true" id="create" data-toggle="modal" data-target="#modalCU">Add Author</button>`
-    // ).insertBefore("#authorsTable_filter");
+    $(
+        `<button class="btn btn-primary" role="button" aria-disabled="true" id="create" data-toggle="modal" data-target="#modalCategory">Add Category</button>`
+    ).insertBefore("#categoryTable_filter");
 });
+
+
+
