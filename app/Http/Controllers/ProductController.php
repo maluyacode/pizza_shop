@@ -52,31 +52,29 @@ class ProductController extends Controller
         return view('product.edit', compact('product'));
     }
 
-    public function productStore(Request $request)
+    public function store(Request $request)
     {
-        $request->validate([
-            'name' => 'required',
-            'price' => 'required',
-            'detail' => 'required',
-            'img_path' => 'required'
-        ]);
+        // $request->validate([
+        //     'name' => 'required',
+        //     'price' => 'required',
+        //     'detail' => 'required',
+        //     'img_path' => 'required'
+        // ]);
 
         $product = new Product();
-
-        if ($request->file()) {
-            $fileName = time() . '_' . $request->file('img_path')->getClientOriginalName();
-
-            $path = Storage::putFileAs('public/images', $request->file('img_path'), $fileName);
-            $product->img_path = '/storage/images/' . $fileName;
-        }
-
         $product->name = $request->name;
         $product->price = $request->price;
         $product->detail = $request->detail;
-        $product->img_path = $request->img_path;
+        $product->category_id = $request->category_id;
+        $product->img_path = 'Wala na po';
+        if ($request->document !== null) {
+            foreach ($request->input("document", []) as $file) {
+                $product->addMedia(storage_path("product/images/" . $file))->toMediaCollection("images");
+            }
+        }
         $product->save();
 
-        return redirect('datatables/product');
+        return response()->json($product);
     }
 
     public function productUpdate(Request $request, $id)

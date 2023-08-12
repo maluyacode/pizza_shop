@@ -119,27 +119,35 @@ $('#save').on('click', function () {
         for (var pair of formData.entries()) {
             console.log(pair[0] + ', ' + pair[1]);
         }
+        $.ajax({
+            url: '/api/product/',
+            type: 'POST',
+            data: formData,
+            contentType: false,
+            processData: false,
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            dataType: "json",
+            success: function (responseData) {
+
+                $('.dz-preview').remove()
+                $('.dz-message').css({
+                    display: "block",
+                })
+                $('input[name="document[]"]').remove();
+
+                $('#modalClose').trigger('click');
+                $('#productForm').trigger("reset");
+
+                table.ajax.reload();
+                alert('added successfully')
+
+            },
+            error: function (responseError) {
+                alert('sadsad');
+            }
+        })
 
     }
-
-    $.ajax({
-        url: '/api/product/',
-        type: 'POST',
-        data: formData,
-        contentType: false,
-        processData: false,
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        },
-        dataType: "json",
-        success: function (responseData) {
-            $('#productForm').trigger("reset");
-            table.ajax.reload();
-            alert('added successfully')
-
-        },
-        error: function (responseError) {
-            alert('sadsad');
-        }
-    })
 });
