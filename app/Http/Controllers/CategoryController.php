@@ -35,15 +35,29 @@ class CategoryController extends Controller
         return response()->json($category);
     }
 
-    public function update()
+    public function update(Request $request, string $id)
     {
-        return view('category.update');
+        $category = Category::find($id);
+        $category->name = $request->name;
+        $category->detail = $request->detail;
+        $category->img_path = "Edited Default";
+        $category->save();
+        return response()->json($category);
+        // return view('category.update');
     }
 
-    public function categoryEdit($id){
-        $category = Category::find($id);
-        return view('category.edit',compact('category'));
+    public function destroy($id)
+    {
+        Category::destroy($id);
+        // return back();
+        return response()->json([]);
     }
+
+
+    // public function categoryEdit($id){
+    //     $category = Category::find($id);
+    //     return view('category.edit',compact('category'));
+    // }
 }
 
 //     public function categoryStore(Request $request){

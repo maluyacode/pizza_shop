@@ -1,14 +1,11 @@
 let table;
 $(function () {
-    // $("#categoryForm").validate({
-    //     rules: {
-    //         name: "required",
-    //         age: "required",
-    //         gender: {
-    //             required: true,
-    //         },
-    //     },
-    // });
+    $("#categoryForm").validate({
+        rules: {
+            name: "required",
+            detail: "required",
+        },
+    });
     table = $("#categoryTable").DataTable({
         ajax: {
             url: "/api/category",
@@ -25,13 +22,13 @@ $(function () {
             {
                 data: "name",
             },
-            // {
-            //     data: null,
-            //     render: function (data) {
-            //         return `<img class="model-image" src="${data.media[0]?.original_url}" alt="NONE">`;
-            //     },
-            //     class: "data-image",
-            // },
+            {
+                data: null,
+                render: function (data) {
+                    return `<img class="model-image" src="${data.media[0]?.original_url}" alt="NONE">`;
+                },
+                class: "data-image",
+            },
             {
                 data: "detail",
             },
@@ -92,7 +89,7 @@ $(document).on("click", ".edit", function (e) {
 });
 
 $("#save").on("click", function (e) {
-
+    if ($("#categoryForm").valid()) {
     let formData = new FormData($("#categoryForm")[0]);
 
     $.ajax({
@@ -111,5 +108,49 @@ $("#save").on("click", function (e) {
         },
         error: function (error) {},
     });
+}
 });
 
+$("#update").on('click', function () {
+    let id = $(this).attr("data-id");
+    let formData = new FormData($('#categoryForm')[0]);
+    for (var pair of formData.entries()) {
+        console.log(pair[0] + ', ' + pair[1]);
+    }
+    formData.append('_method', 'PUT');
+    $.ajax({
+        url: `/api/category/${id}`,
+        type: 'POST',
+        data: formData,
+        contentType: false,
+        processData: false,
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        dataType: "json",
+        success: function (data) {
+            $("#modalCategory").modal("hide");
+            table.ajax.reload();
+        },
+        error: function (error) {},
+    })
+});
+
+$(document).on("click", ".delete", function (e) {
+    let id = $(this).attr("data-id");
+    alert("Delete?");
+    $.ajax({
+        url: `/api/category/${id}`,
+        type: "delete",
+        headers: {
+            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+        },
+        dataType: "json",
+        success: function (data) {
+            table.ajax.reload();
+        },
+        error: function (error) {
+            alert(error);
+        },
+    });
+});

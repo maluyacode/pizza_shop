@@ -1,5 +1,8 @@
 @extends('layouts.app')
 
+@section('styles')
+<link rel="stylesheet" href="{{ asset('css/category.css') }}">
+@endsection
 @section('content')
     <div class="container-fluid">
     </div>
@@ -14,7 +17,7 @@
                         <th scope="col">Name</th>
                         <th scope="col">Detail</th>
                         <th scope="col">Actions</th>
-                        {{-- <th scope="col">Image</th> --}}
+                        <th scope="col">Image</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -59,6 +62,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
     </script>
+        <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
     <script src="{{ asset('js/category.js') }}"></script>
 @endsection
 @endsection
