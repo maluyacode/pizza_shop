@@ -54,38 +54,28 @@ let table = $('#product-table').DataTable({
         }
     ]
 });
-
+let validator;
 $(function () {
     $('.buttons-create').attr({
         "data-toggle": "modal",
         "data-target": "#productModal",
     });
 
-    validator = $('#carForm').validate({
-        invalidHandler: function (form, validator) {
-            var errors = validator.numberOfInvalids();
-            if (errors) {
-                var firstInvalidElement = $(validator.errorList[0].element);
-                $('.content,.modal-content').scrollTop(firstInvalidElement.offset().top);
-                firstInvalidElement.focus();
-            }
-        },
+    validator = $('#productForm').validate({
         rules: {
-            platenumber: {
+            name: {
                 required: true,
                 minlength: 5,
             },
-            price_per_day: {
+            price: {
                 required: true,
                 number: true,
                 // numberNotStartWithZero: true,
             },
-            cost_price: {
+            category_id: {
                 required: true,
-                number: true,
-                // numberNotStartWithZero: true,
             },
-            description: {
+            detail: {
                 required: true,
                 minlength: 10,
             },
@@ -94,6 +84,9 @@ $(function () {
 })
 
 function createButton() {
+    $('#productForm').trigger("reset");
+    $('#update').hide()
+    $('#save').show()
 
     $.ajax({
         url: "/api/product/create",
@@ -115,3 +108,38 @@ function createButton() {
         },
     })
 }
+
+
+$('#save').on('click', function () {
+
+    if ($('#productForm').valid()) {
+
+        let formData = new FormData($('#productForm')[0]);
+
+        for (var pair of formData.entries()) {
+            console.log(pair[0] + ', ' + pair[1]);
+        }
+
+    }
+
+    $.ajax({
+        url: '/api/product/',
+        type: 'POST',
+        data: formData,
+        contentType: false,
+        processData: false,
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        dataType: "json",
+        success: function (responseData) {
+            $('#productForm').trigger("reset");
+            table.ajax.reload();
+            alert('added successfully')
+
+        },
+        error: function (responseError) {
+            alert('sadsad');
+        }
+    })
+});

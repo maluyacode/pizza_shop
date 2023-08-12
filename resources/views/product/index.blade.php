@@ -64,6 +64,10 @@
                             <textarea class="form-control" id="detail" rows="3" name="detail"
                                 placeholder="Describe the pizza product ex. Masarap"></textarea>
                         </div>
+                        <div class="form-group">
+                            <label for="detail">Image</label>
+                            <div class="dropzone" id="dropzone-image"></div>
+                        </div>
                     </form>
                 </div>
                 <div class="modal-footer">
@@ -74,6 +78,55 @@
             </div>
         </div>
     </div>
+    <script>
+        initilizeDropzone();
+        var uploadedDocumentMap = {}
+
+        function initilizeDropzone() {
+            Dropzone.options.dropzoneImage = {
+                url: '{{ route('products.storeMedia') }}',
+                // maxFilesize: 2,
+                // acceptedFiles: 'image/*',
+                addRemoveLinks: true,
+                headers: {
+                    'X-CSRF-TOKEN': "{{ csrf_token() }}"
+                },
+                success: function(file, response) {
+                    $('form').append('<input type="hidden" name="document[]" value="' + response.name + '">')
+                    uploadedDocumentMap[file.name] = response.name
+                },
+                removedfile: function(file) {
+                    file.previewElement.remove()
+                    var name = ''
+                    if (typeof file.file_name !== 'undefined') {
+                        name = file.file_name
+                    } else {
+                        name = uploadedDocumentMap[file.name]
+                    }
+                    $('form').find('input[name="document[]"][value="' + name + '"]').remove()
+                },
+                error: function(file) {
+                    alert("Only image will be accepted.");
+                    file.previewElement.remove();
+                    $('.dz-message').css({
+                        display: "block",
+                    })
+                },
+                init: function() {
+                    @if (isset($project) && $project->document)
+                        var files = {!! json_encode($project->document) !!}
+                        for (var i in files) {
+                            var file = files[i]
+                            this.options.addedfile.call(this, file)
+                            file.previewElement.classList.add('dz-complete')
+                            $('form').append('<input type="hidden" name="document[]" value="' + file.file_name +
+                                '">')
+                        }
+                    @endif
+                },
+            }
+        }
+    </script>
 @endsection
 
 @section('scripts')

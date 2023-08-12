@@ -28,6 +28,24 @@ class ProductController extends Controller
         return view('product.update');
     }
 
+    public function storeMedia(Request $request)
+    {
+        $path = storage_path("product/images");
+        if (!file_exists($path)) {
+            mkdir($path, 0777, true);
+        }
+
+        $file = $request->file("file");
+        $name = uniqid() . "_" . trim($file->getClientOriginalName());
+        $file->move($path, $name);
+
+        return response()->json([
+            "name" => $name,
+            "original_name" => $file->getClientOriginalName(),
+        ]);
+        // unlink($path);
+    }
+
     public function productEdit($id)
     {
         $product = Product::find($id);
