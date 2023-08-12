@@ -1,22 +1,19 @@
 @extends('layouts.app')
 @section('styles')
+    <link rel="stylesheet" href="{{ asset('css/home.css') }}">
 @endsection
 @section('content')
-    <div class="container">
+    <div class="container-fluid">
         <div class="row justify-content-center">
-            <div class="col-md-8">
-                <div class="card">
-                    <div class="card-header">{{ __('Dashboard') }}</div>
-
-                    <div class="card-body">
-                        @if (session('status'))
-                            <div class="alert alert-success" role="alert">
-                                {{ session('status') }}
-                            </div>
-                        @endif
-
-                        {{ __('You are logged in!') }}
-                    </div>
+            <div class="card col-md-4">
+                <img class="card-img-top" src="{{ asset('storage/images/profilePic.jpg') }}" alt="Card image cap">
+                <div class="card-body">
+                    <h5 class="card-title">Card title</h5>
+                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to
+                        additional content. This content is a little bit longer.</p>
+                </div>
+                <div class="card-footer">
+                    <button class="btn btn-dark">View All</button>
                 </div>
             </div>
         </div>
