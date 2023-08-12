@@ -1,0 +1,10 @@
+label.error
+{
+    color: red;
+    font-size: small;
+}
+.model-image {
+    width: 75px;
+    height: 75px;
+    object-fit: cover;
+}

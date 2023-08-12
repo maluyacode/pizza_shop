@@ -1,14 +1,14 @@
 let table;
 $(function () {
-    $("#categoryForm").validate({
-        rules: {
-            name: "required",
-            detail: "required",
-        },
-    });
-    table = $("#categoryTable").DataTable({
+    // $("#categoryForm").validate({
+    //     rules: {
+    //         name: "required",
+    //         detail: "required",
+    //     },
+    // });
+    table = $("#paymentTable").DataTable({
         ajax: {
-            url: "/api/category",
+            url: "/api/payment",
             dataSrc: "",
             contentType: "application/json",
         },
@@ -20,9 +20,6 @@ $(function () {
                 data: "id",
             },
             {
-                data: "name",
-            },
-            {
                 data: null,
                 render: function (data) {
                     return `<img class="model-image" src="${data.media[0]?.original_url}" alt="NONE">`;
@@ -30,8 +27,12 @@ $(function () {
                 class: "data-image",
             },
             {
-                data: "detail",
+                data: "name",
             },
+            {
+                data: "description",
+            },
+
             {
                 data: null,
                 render: function (data) {
@@ -48,21 +49,21 @@ $(function () {
     });
 
     $(
-        `<button class="btn btn-primary" role="button" aria-disabled="true" id="create" data-toggle="modal" data-target="#modalCategory">Add Category</button>`
-    ).insertBefore("#categoryTable_filter");
+        `<button class="btn btn-primary" role="button" aria-disabled="true" id="create" data-toggle="modal" data-target="#modalCategory">Add Payment</button>`
+    ).insertBefore("#paymentTable_filter");
 });
 
 $(document).on("click", "#create", function (e) {
-    // $("#document1").show();
-    // $("#document-dropzone").show();
-    $("#categoryForm").trigger("reset");
+    $("#detail").show();
+    $("#dropzone-image").show();
+    $("#paymentForm").trigger("reset");
     $("#update").hide();
     $("#save").show();
 });
 
 $(document).on("click", ".edit", function (e) {
     $("#detail").hide();
-    $("#document-dropzone").hide();
+    $("#dropzone-image").hide();
     let id = $(this).attr("data-id");
     $("#categoryForm").trigger("reset");
     $("#update").show();
@@ -109,48 +110,4 @@ $("#save").on("click", function (e) {
             error: function (error) { },
         });
     }
-});
-
-$("#update").on('click', function () {
-    let id = $(this).attr("data-id");
-    let formData = new FormData($('#categoryForm')[0]);
-    for (var pair of formData.entries()) {
-        console.log(pair[0] + ', ' + pair[1]);
-    }
-    formData.append('_method', 'PUT');
-    $.ajax({
-        url: `/api/category/${id}`,
-        type: 'POST',
-        data: formData,
-        contentType: false,
-        processData: false,
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        },
-        dataType: "json",
-        success: function (data) {
-            $("#modalCategory").modal("hide");
-            table.ajax.reload();
-        },
-        error: function (error) { },
-    })
-});
-
-$(document).on("click", ".delete", function (e) {
-    let id = $(this).attr("data-id");
-    alert("Delete?");
-    $.ajax({
-        url: `/api/category/${id}`,
-        type: "delete",
-        headers: {
-            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
-        },
-        dataType: "json",
-        success: function (data) {
-            table.ajax.reload();
-        },
-        error: function (error) {
-            alert(error);
-        },
-    });
 });
