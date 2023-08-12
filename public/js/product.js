@@ -57,5 +57,8 @@ let table = $('#product-table').DataTable({
 });
 
 function createButton() {
-
+    $('.buttons-create').attr({
+        "data-toggle": "modal",
+        "data-target": "productModal",
+    });
 }
