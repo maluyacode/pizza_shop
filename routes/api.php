@@ -23,3 +23,4 @@ Route::resource('category', App\Http\Controllers\CategoryController::class);
 Route::resource('product', App\Http\Controllers\ProductController::class);
 Route::post('/product/images', [App\Http\Controllers\ProductController::class, 'storeMedia'])->name('products.storeMedia');
 Route::post('/category/images', [App\Http\Controllers\CategoryController::class, 'storeMedia'])->name('category.storeMedia');
+Route::post('/user/images', [App\Http\Controllers\UserController::class, 'storeMedia'])->name('user.storeMedia');

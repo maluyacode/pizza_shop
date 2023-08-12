@@ -21,6 +21,7 @@
 #user-table {
     padding-top: 20px;
     /* table-layout: fixed !important; */
+    margin-top: 15px !important;
     width: 100%;
     border-left: 2px solid #464444 !important;
     border-right: 2px solid #464444 !important;
@@ -57,7 +58,7 @@
 
 #user-table thead tr th {
     padding: 0;
-    min-width: 120px;
+    min-width: 75px;
 }
 
 #userForm .form-group {
@@ -72,4 +73,8 @@ label.error {
 #user-table_filter {
     display: inline-block;
     float: right;
+}
+
+td.email {
+    text-transform: lowercase !important;
 }

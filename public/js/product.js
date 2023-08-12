@@ -7,6 +7,7 @@ let table = $('#product-table').DataTable({
     responsive: true,
     autoWidth: false,
     dom: 'Bfrtip',
+    pageLength: 4,
     buttons: [
         {
             text: '<i class="fas fa-plus"></i> Create Product',
