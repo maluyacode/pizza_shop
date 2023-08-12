@@ -9,7 +9,7 @@ let table = $('#product-table').DataTable({
     dom: 'Bfrtip',
     buttons: [
         {
-            text: '<i class="fas fa-plus"></i> Create',
+            text: '<i class="fas fa-plus"></i> Create Product',
             action: createButton,
             className: "buttons-create",
         },
@@ -25,10 +25,12 @@ let table = $('#product-table').DataTable({
             data: 'category.name'
         },
         {
-            data: 'price'
+            data: 'price',
+            class: "price",
         },
         {
-            data: 'detail'
+            data: 'detail',
+            class: "detail",
         },
         {
             data: null,
@@ -53,9 +55,63 @@ let table = $('#product-table').DataTable({
     ]
 });
 
-function createButton() {
+$(function () {
     $('.buttons-create').attr({
         "data-toggle": "modal",
         "data-target": "#productModal",
     });
+
+    validator = $('#carForm').validate({
+        invalidHandler: function (form, validator) {
+            var errors = validator.numberOfInvalids();
+            if (errors) {
+                var firstInvalidElement = $(validator.errorList[0].element);
+                $('.content,.modal-content').scrollTop(firstInvalidElement.offset().top);
+                firstInvalidElement.focus();
+            }
+        },
+        rules: {
+            platenumber: {
+                required: true,
+                minlength: 5,
+            },
+            price_per_day: {
+                required: true,
+                number: true,
+                // numberNotStartWithZero: true,
+            },
+            cost_price: {
+                required: true,
+                number: true,
+                // numberNotStartWithZero: true,
+            },
+            description: {
+                required: true,
+                minlength: 10,
+            },
+        },
+    })
+})
+
+function createButton() {
+
+    $.ajax({
+        url: "/api/product/create",
+        type: "GET",
+        dataType: "json",
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        success: function (data) {
+            console.log();
+            $.each(data, function (index, value) {
+                $('#select-category').append($('<option>').attr({
+                    "value": index,
+                }).html(value))
+            })
+        },
+        error: function (error) {
+            alert("error");
+        },
+    })
 }

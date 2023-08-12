@@ -1,0 +1,56 @@
+.model-image {
+    width: 150px;
+    height: 150px;
+}
+
+.action-buttons {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+
+.buttons-create {
+    margin-left: 10px;
+}
+
+.action-buttons button {
+    width: 75px;
+
+}
+
+#product-table {
+    padding-top: 10px;
+    table-layout: fixed !important;
+}
+
+#product-table thead tr th {
+    border-bottom: 1px solid black !important;
+    text-align: center !important;
+}
+
+#product-table tbody tr td {
+    padding: 5px;
+    text-align: center;
+}
+
+/* .price{
+    text-align: center;
+} */
+
+/* #product-table {
+    border: 1px solid #464444 !important;
+} */
+
+/* #product-table th {
+    border: 1px solid #464444 !important;
+} */
+
+#product-table td {
+    text-transform: capitalize;
+    border-bottom: 1px solid #464444 !important;
+}
+
+#productForm .form-group {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}

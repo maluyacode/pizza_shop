@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Models\Product;
-use Storage;
+use Barryvdh\Debugbar\Facades\Debugbar;
+use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
@@ -16,7 +18,9 @@ class ProductController extends Controller
 
     public function create()
     {
-        return view('product.create');
+        $categories = Category::pluck('name', 'id');
+
+        return response()->json($categories);
     }
 
     public function update()

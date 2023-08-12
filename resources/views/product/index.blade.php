@@ -3,8 +3,12 @@
 @section('styles')
     <link rel="stylesheet" href="{{ asset('css/product.css') }}">
     <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.js"></script>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
-        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    {{-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"> --}}
+    <link rel="stylesheet" type="text/css"
+        href="https://cdn.datatables.net/responsive/2.2.9/css/responsive.dataTables.min.css">
+    <script type="text/javascript" src="https://cdn.datatables.net/responsive/2.2.9/js/dataTables.responsive.min.js">
+    </script>
 @endsection
 
 @section('content')
@@ -38,11 +42,34 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    ...
+                    <form id="productForm">
+                        <div class="form-group">
+                            <label for="name">Product name</label>
+                            <input type="text" class="form-control" id="name" placeholder="Enter product name"
+                                name="name">
+                        </div>
+                        <div class="form-group">
+                            <label for="price">Product Price</label>
+                            <input type="text" class="form-control" id="price" placeholder="Enter product price"
+                                name="price">
+                        </div>
+                        <div class="form-group">
+                            <label for="category_id">Product Category</label>
+                            <select class="form-control" id="select-category" name="category_id">
+                                <option value="">Select product category</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="detail">Product Description</label>
+                            <textarea class="form-control" id="detail" rows="3" name="detail"
+                                placeholder="Describe the pizza product ex. Masarap"></textarea>
+                        </div>
+                    </form>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save New</button>
+                    <button id="save" type="button" class="btn btn-primary">Save New</button>
+                    <button id="update" type="button" class="btn btn-primary">Save Changes</button>
                 </div>
             </div>
         </div>
@@ -58,5 +85,6 @@
     </script>
     <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.6.5/js/dataTables.buttons.min.js"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.6.5/js/buttons.bootstrap4.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
     <script src="{{ asset('js/product.js') }}"></script>
 @endsection
