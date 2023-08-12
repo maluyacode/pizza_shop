@@ -76,6 +76,6 @@ class CategoryController extends Controller
 
     public function categories()
     {
-        return View::make('home');
+        return View::make('home', ['categories' => Category::with(['media'])->get()]);
     }
 }

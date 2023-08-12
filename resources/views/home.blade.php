@@ -2,20 +2,29 @@
 @section('styles')
     <link rel="stylesheet" href="{{ asset('css/home.css') }}">
 @endsection
+{{-- {{ dd($categories) }} --}}
 @section('content')
     <div class="container-fluid">
+        <div class="row justify-content-center title">
+            <h1>Menu</h1>
+        </div>
         <div class="row justify-content-center">
-            <div class="card col-md-4">
-                <img class="card-img-top" src="{{ asset('storage/images/profilePic.jpg') }}" alt="Card image cap">
-                <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to
-                        additional content. This content is a little bit longer.</p>
+            @foreach ($categories as $category)
+                <div class="card col-md-4">
+                    @if (count($category->media) > 0)
+                        <img class="card-img-top" src="{{ $category->media[0]->original_url }}" alt="Card image cap">
+                    @else
+                        <img class="card-img-top" src="{{ asset('storage/images/profilePic.jpg') }}" alt="Card image cap">
+                    @endif
+                    <div class="card-body">
+                        <h5 class="card-title">{{ $category->name }}</h5>
+                        <p class="card-text">{{ $category->detail }}</p>
+                    </div>
+                    <div class="card-footer">
+                        <button class="btn btn-dark">View All</button>
+                    </div>
                 </div>
-                <div class="card-footer">
-                    <button class="btn btn-dark">View All</button>
-                </div>
-            </div>
+            @endforeach
         </div>
     </div>
 @endsection
