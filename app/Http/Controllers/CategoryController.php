@@ -18,6 +18,22 @@ class CategoryController extends Controller
     {
         return view('category.create');
     }
+    public function store(Request $request)
+    {
+        $category = new Category;
+        $category->name = $request->name;
+        $category->detail = $request->detail;
+        $category->img_path = "Default";
+        $category->save();
+        // return redirect()->route('author.tables');
+        return response()->json($category);
+    }
+
+    public function edit(String $id)
+    {
+        $category = Category::find($id);
+        return response()->json($category);
+    }
 
     public function update()
     {
