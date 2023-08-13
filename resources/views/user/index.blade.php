@@ -13,10 +13,12 @@
 
 @section('content')
     <div class="container">
-        <form action="{{route('user.import')}}" method="post" enctype="multipart/form-data">
-            @csrf
-            <input type="file" id="uploadName" class="form-control" name="excel" required>
-            <button type="submit" class="btn btn-info btn-primary">Import Excel File</button>
+        <form id="importForm" action="{{ route('user.import') }}" method="post" enctype="multipart/form-data">
+            <div class="form-group form-import">
+                @csrf
+                <input type="file" id="uploadName" class="form-control" name="excel" required>
+                <button type="submit" class="btn btn-info btn-primary">Import Excel File</button>
+            </div>
         </form>
         <table id="user-table">
             <thead>
@@ -37,7 +39,8 @@
         </table>
     </div>
 
-    <div class="modal fade" id="userModal" tabindex="-1" role="dialog" aria-labelledby="userModalTitle" aria-hidden="true">
+    <div class="modal fade" id="userModal" tabindex="-1" role="dialog" aria-labelledby="userModalTitle"
+        aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">

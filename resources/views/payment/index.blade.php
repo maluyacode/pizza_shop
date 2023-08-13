@@ -8,13 +8,15 @@
     </div>
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <div class="card">
-                <form action="{{route('payment.import')}}" method="post" enctype="multipart/form-data">
+
+            <form  id="importForm" action="{{ route('payment.import') }}" method="post" enctype="multipart/form-data">
+                <div class="form-group form-import">
                     @csrf
                     <input type="file" id="uploadName" class="form-control" name="excel" required>
                     <button type="submit" class="btn btn-info btn-primary">Import Excel File</button>
-                </form>
-            </div>
+                </div>
+            </form>
+
             <table id="paymentTable" class="table">
                 <thead>
                     <tr>
@@ -60,7 +62,7 @@
                         </div>
                 </div>
                 <div class="modal-footer">
-                    <button id ="close" type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button id="close" type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                     <button id="save" type="button" class="btn btn-primary">Save</button>
                     <button id="update" type="button" class="btn btn-primary">Update</button>
                 </div>

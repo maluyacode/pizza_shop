@@ -8,13 +8,13 @@
     </div>
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <div class="card">
-                    <form action="{{route('category.import')}}" method="post" enctype="multipart/form-data">
-                        @csrf
-                        <input type="file" id="uploadName" class="form-control" name="excel" required>
-                        <button type="submit" class="btn btn-info btn-primary">Import Excel File</button>
-                    </form>
-            </div>
+            <form id="importForm" action="{{ route('category.import') }}" method="post" enctype="multipart/form-data">
+                <div class="form-group form-import">
+                    @csrf
+                    <input type="file" id="uploadName" class="form-control" name="excel" required>
+                    <button type="submit" class="btn btn-info btn-primary">Import Excel File</button>
+                </div>
+            </form>
             <table id="categoryTable" class="table">
                 <thead>
                     <tr>

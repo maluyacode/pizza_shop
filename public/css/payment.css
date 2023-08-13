@@ -1,23 +1,31 @@
-label.error
-{
+label.error {
     color: red;
     font-size: small;
 }
+
 .model-image {
     width: 75px;
     height: 75px;
     object-fit: cover;
 }
+
 #uploadName {
     border: 1px solid #ccc;
-    padding: 8px;
     border-radius: 4px;
-    width: 100%;
-    margin-bottom: 15px;
     transition: border-color 0.2s ease-in-out;
+    width: 300px;
 }
 
 #uploadName:focus {
     border-color: #66afe9;
     outline: 0;
+}
+
+.form-import {
+    display: flex;
+    flex-direction: row;
+    justify-content: end;
+    height: 40px;
+    gap: 10px;
+
 }

@@ -12,6 +12,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
+use App\Events\EmailCheckoutEvent;
 
 class CartController extends Controller
 {
@@ -123,6 +124,8 @@ class CartController extends Controller
         }
         Session::forget('cart');
         DB::commit();
+
+        EmailCheckoutEvent::dispatch($order);
 
         return back()->with('success', 'Successfully checkout, we will send you an email once we review your order. Thank you!');
     }
