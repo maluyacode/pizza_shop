@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Payment;
 use App\Models\Product;
+use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 
@@ -22,6 +24,7 @@ class CartController extends Controller
             'product_id' => $product->id,
             'quantity' => 1,
             'product_price' => $product->price,
+            'product_name' => $product->name,
         ];
 
         $cart[$id] = $producsCart;
@@ -34,6 +37,10 @@ class CartController extends Controller
 
     public function viewCart()
     {
-        Session::forget('cart');
+        // Session::forget('cart');
+        $cart = Session::get('cart', []);
+        $payments = Payment::pluck('name', 'id');
+        // dd($payments);
+        return view('user.cart', compact('cart', 'payments'));
     }
 }

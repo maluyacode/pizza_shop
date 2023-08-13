@@ -1,0 +1,54 @@
+.title h1 {
+    text-align: center;
+    border: 2px solid black;
+    border-radius: 10px;
+    /* border-bottom: 2px solid black; */
+    background-color: rgb(217, 224, 229);
+    width: 60%;
+    margin-bottom: 20px;
+
+}
+
+.justify-content-center {
+    padding: 0 150px;
+}
+
+.thead-dark tr th {
+    background-color: #212529;
+    color: aliceblue;
+    text-align: center;
+    padding: 20px 0;
+}
+
+table {
+    border: 2px solid black;
+    border-radius: 10px;
+}
+
+table tbody tr {
+    height: 75px;
+}
+
+
+table tbody tr td {
+    text-align: center;
+}
+
+.quantity{
+    width: 50px;
+    text-align: center;
+}
+
+.checkout-card{
+    min-width: 350px !important;
+}
+
+.card-title{
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.form-group{
+    margin-bottom: 20px;
+}

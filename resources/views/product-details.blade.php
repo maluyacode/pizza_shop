@@ -9,8 +9,12 @@
             <div class="card mb-3" style="max-width: 1000px; max-height: 500px;">
                 <div class="row g-0">
                     <div class="col-md-5 left-col">
-                        <img src="https://mdbcdn.b-cdn.net/wp-content/uploads/2020/06/vertical.webp"
-                            alt="Trendy Pants and Shoes" class="img-fluid rounded-start" />
+                        @if (count($product->media) > 0)
+                            <img class="card-img-top" src="{{ $product->media[0]->original_url }}" alt="Card image cap">
+                        @else
+                            <img class="card-img-top" src="{{ asset('storage/images/profilePic.jpg') }}"
+                                alt="Card image cap">
+                        @endif
                     </div>
                     <div class="col-md-7" style="display: flex; flex-direction:column;justify-content:space-between">
                         <div class="card-body">
@@ -22,7 +26,8 @@
                             <p class="card-text">
                                 @foreach ($relatedProduct as $product)
                                     <small class="text-muted">
-                                        <a style="margin-bottom: 5px" class="btn btn-outline-dark btn-sm" href="{{ route('product.details', $product->id) }}">{{ $product->name }}</a>
+                                        <a style="margin-bottom: 5px" class="btn btn-outline-dark btn-sm"
+                                            href="{{ route('product.details', $product->id) }}">{{ $product->name }}</a>
                                     </small>
                                 @endforeach
                             </p>
