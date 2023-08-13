@@ -17,14 +17,14 @@ $(function () {
 
 $(function () {
     $.ajax({
-        url: `/api/bestSeller`,
+        url: `/api/categories/product`,
         type: "GET",
         headers: {
             "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
         },
         dataType: "json",
         success: function (data) {
-            OrderCount(data);
+            categoriesProduct(data);
         },
         error: function (error) {
             alert(error);
@@ -61,19 +61,17 @@ function OrderCount(data) {
         },
     });
 }
-function OrderCount(data) {
+function categoriesProduct(data) {
     console.log(data);
-    const ctx = document.getElementById("Chart1");
+    const ctx = document.getElementById("Chart2");
     new Chart(ctx, {
-        type: "bar",
+        type: "pie",
         data: {
             labels: Object.keys(data),
             datasets: [
                 {
-                    label: "# of Order Count",
+                    label: "# of Categories by Products",
                     data: Object.values(data),
-                    backgroundColor: "rgba(75, 192, 192, 0.3)",
-                    borderColor: "rgba(75, 192, 192, 1)",
                     borderWidth: 1,
                 },
             ],
