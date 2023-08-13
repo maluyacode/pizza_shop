@@ -3,23 +3,34 @@
 namespace App\Imports;
 
 use App\Models\Product;
-use Maatwebsite\Excel\Concerns\ToModel;
+use App\Models\Stock;
+use Illuminate\Support\Collection;
+use Maatwebsite\Excel\Concerns\ToCollection;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
-class ProductImport implements ToModel, WithHeadingRow
+
+class ProductImport implements ToCollection, WithHeadingRow
 {
-    /**
-    * @param array $row
-    *
-    * @return \Illuminate\Database\Eloquent\Model|null
-    */
-    public function model(array $row)
+    public function collection(Collection $rows)
     {
-        return new Product([
-            'name'  => $row['name'],
-            'price'  => $row['price'],
-            'detail'  => $row['detail'],
-            'img_path'  => $row['img_path'],
-            'category_id'  => $row['category_id'],
-        ]);
+        // return new Product([
+        //     'name'  => $row['name'],
+        //     'price'  => $row['price'],
+        //     'detail'  => $row['detail'],
+        //     'img_path'  => $row['img_path'],
+        //     'category_id'  => $row['category_id'],
+        // ]);
+        foreach ($rows as $row) {
+            $product =  Product::create([
+                'name'  => $row['name'],
+                'price'  => $row['price'],
+                'detail'  => $row['detail'],
+                'img_path'  => $row['img_path'],
+                'category_id'  => $row['category_id'],
+            ]);
+            $stock = new Stock;
+            $stock->product_id = $product->id;
+            $stock->quantity = 0;
+            $stock->save();
+        }
     }
 }
