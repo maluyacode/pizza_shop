@@ -115,6 +115,9 @@ class CartController extends Controller
                 $order->products()->attach($productId, ['quantity' => $product["quantity"]]);
 
                 $stock = Stock::where('product_id', $productId)->first();
+                if (!$stock) {
+                    return back()->with('warning', 'Please comeback tommorow');
+                }
                 $stock->quantity = $stock->quantity - $product["quantity"];
                 $stock->save();
             }
