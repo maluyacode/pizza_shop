@@ -32,4 +32,8 @@ class CartController extends Controller
         return back()->with('success', 'Successfully added to cart, you may check you cart and edit.');
     }
 
+    public function viewCart()
+    {
+        dd("ASd");
+    }
 }
