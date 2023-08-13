@@ -32,3 +32,5 @@ Route::view('/product/index', 'product.index')->name('product.index');
 Route::view('/user/index', 'user.index')->name('user.index');
 Route::view('/payment/index', 'payment.index')->name('payment.index');
 
+Route::get('/addCart/{id}', [App\Http\Controllers\CartController::class, 'addCart'])->name('add.cart');
+
