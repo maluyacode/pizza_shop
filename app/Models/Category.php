@@ -12,6 +12,9 @@ class Category extends Model implements HasMedia
 {
     use HasFactory;
     use InteractsWithMedia;
+
+    protected $fillable =['name','detail','img_path'];
+
     public function products(){
         return $this->hasMany(Product::class);
     }
