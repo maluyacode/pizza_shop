@@ -24,6 +24,8 @@ Route::get('/', function () {
 
 Auth::routes();
 
+Route::get('/bestSeller', [App\Http\Controllers\ProductController::class, 'bestSeller']);
+
 Route::get('/home', [App\Http\Controllers\FrontEndController::class, 'categories'])->name('home');
 Route::get('/product/{id}/all', [App\Http\Controllers\FrontEndController::class, 'ViewAllProduct'])->name('ViewAllProduct');
 Route::get('/product/{id}/details', [App\Http\Controllers\FrontEndController::class, 'product'])->name('product.details');

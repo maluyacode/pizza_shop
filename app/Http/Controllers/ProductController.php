@@ -134,8 +134,26 @@ class ProductController extends Controller
         DB::table('media')->where('model_type', 'App\Model\Product')->where('model_id', $id)->delete();
         return response()->json([]);
     }
-    public function import(Request $request){
+    public function import(Request $request)
+    {
         Excel::import(new ProductImport, $request->excel);
         return redirect()->route('product.index');
+    }
+
+    public function bestSeller()
+    {
+        $products = Product::with(['orders'])->get();
+
+        $bestSellers = [];
+
+        foreach ($products as $product) {
+            $quantity = 0;
+            foreach ($product->orders as $order) {
+                $quantity += $order->pivot->quantity;
+            }
+            $bestSellers[$product->name] = $quantity;
+        }
+
+        return response()->json($bestSellers);
     }
 }
