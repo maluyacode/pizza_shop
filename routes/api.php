@@ -18,14 +18,18 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::resource('user', App\Http\Controllers\UserController::class);
 Route::resource('category', App\Http\Controllers\CategoryController::class);
-Route::resource('product', App\Http\Controllers\ProductController::class);
-Route::resource('payment', App\Http\Controllers\PaymentController::class);
 
-Route::get('/order', [App\Http\Controllers\OrderController::class, 'index']);
+Route::middleware(['auth'])->group(function () {
+    Route::resource('user', App\Http\Controllers\UserController::class);
+    Route::resource('product', App\Http\Controllers\ProductController::class);
+    Route::resource('payment', App\Http\Controllers\PaymentController::class);
+    Route::post('/product/images', [App\Http\Controllers\ProductController::class, 'storeMedia'])->name('products.storeMedia');
+    Route::post('/category/images', [App\Http\Controllers\CategoryController::class, 'storeMedia'])->name('category.storeMedia');
+    Route::post('/user/images', [App\Http\Controllers\UserController::class, 'storeMedia'])->name('user.storeMedia');
+    Route::post('/payment/images', [App\Http\Controllers\PaymentController::class, 'storeMedia'])->name('payment.storeMedia');
+});
 
-Route::post('/product/images', [App\Http\Controllers\ProductController::class, 'storeMedia'])->name('products.storeMedia');
-Route::post('/category/images', [App\Http\Controllers\CategoryController::class, 'storeMedia'])->name('category.storeMedia');
-Route::post('/user/images', [App\Http\Controllers\UserController::class, 'storeMedia'])->name('user.storeMedia');
-Route::post('/payment/images', [App\Http\Controllers\PaymentController::class, 'storeMedia'])->name('payment.storeMedia');
+Route::middleware(['auth', 'authorize'])->group(function () {
+    Route::get('/order', [App\Http\Controllers\OrderController::class, 'index']);
+});
