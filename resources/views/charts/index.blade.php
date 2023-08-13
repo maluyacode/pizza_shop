@@ -9,9 +9,11 @@
             <h1>Charts</h1>
         </div>
         <div class="row justify-content-center">
-            <h1>DISPLAY HERE</h1>
+            <canvas id="Chart1"></canvas>
         </div>
     </div>
 @endsection
 @section('scripts')
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="{{ asset('/js/chart.js') }}"></script>
 @endsection

@@ -120,6 +120,7 @@ class CartController extends Controller
             }
         } catch (\Exception $e) {
             DB::rollBack();
+            Debugbar::info($e);
             return back()->with('warning', 'Add your product first');
         }
         Session::forget('cart');
