@@ -18,12 +18,17 @@
                                 </span>
                             </h1>
                             <p class="card-text">{{ $product->detail }}</p>
+                            <h5>Related Products</h5>
                             <p class="card-text">
-                                <small class="text-muted">{{ $product->detail }}</small>
+                                @foreach ($relatedProduct as $product)
+                                    <small class="text-muted">
+                                        <a style="margin-bottom: 5px" class="btn btn-outline-dark btn-sm" href="{{ route('product.details', $product->id) }}">{{ $product->name }}</a>
+                                    </small>
+                                @endforeach
                             </p>
                         </div>
                         <div class="card-footer">
-                            <button class="btn btn-outline-warning" style="float: right">Add to Cart</button>
+                            <button class="btn btn-outline-success" style="float: right">Add to Cart</button>
                         </div>
                     </div>
                 </div>

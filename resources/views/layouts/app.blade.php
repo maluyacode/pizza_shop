@@ -28,6 +28,7 @@
     {{-- Dropzone --}}
     <script src="https://unpkg.com/dropzone@5/dist/min/dropzone.min.js"></script>
     <link rel="stylesheet" href="https://unpkg.com/dropzone@5/dist/min/dropzone.min.css" type="text/css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
 </head>
 
 <body>
@@ -45,15 +46,12 @@
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav me-auto">
+                    <ul class="navbar-nav me-auto" style="font-size: 16px !important;">
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('home') }}">{{ __('Home') }}</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#">{{ __('Products') }}</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">{{ __('Cart') }}</a>
                         </li>
                     </ul>
 
@@ -74,12 +72,12 @@
                                 </li>
                             @endif
                         @else
+                            <a class="btn btn-outline-warning" href=""><i class="bi bi-cart4"></i> Cart <span>(3)</span></a>
                             <div class="dropdown show" style="height: fit-content;">
                                 <a class="btn btn-light dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
                                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     Management
                                 </a>
-
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                                     <a class="dropdown-item" href="{{ route('product.index') }}">Manage Product</a>
                                     <a class="dropdown-item" href="{{ url('/category') }}">Manage Category</a>

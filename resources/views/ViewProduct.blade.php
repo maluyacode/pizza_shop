@@ -22,8 +22,8 @@
                         <p class="card-text">{{ $product->detail }}</p>
                     </div>
                     <div class="card-footer" style="display:flex;justify-content:space-between; ">
-                        <button class="btn btn-dark">Add to Cart</button>
-                        <a href="{{ route('product.details', $product->id) }}" class="btn btn-dark">Quick View</a>
+                        <button class="btn btn-outline-success">Add to Cart</button>
+                        <a href="{{ route('product.details', $product->id) }}" class="btn btn-outline-dark">Quick View</a>
                     </div>
                 </div>
             @endforeach

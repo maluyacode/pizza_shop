@@ -25,6 +25,8 @@ class FrontEndController extends Controller
 
     public function product($id)
     {
-        return View::make('product-details', ['product' => Product::with('media')->find($id)]);
+        $product = Product::with('media')->find($id);
+        $relatedProduct = Product::where('category_id', $product->category_id)->whereNotIn('id', [$product->id])->get();
+        return View::make('product-details', ['product' => $product, 'relatedProduct' => $relatedProduct]);
     }
 }

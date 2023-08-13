@@ -21,7 +21,7 @@
                         <p class="card-text">{{ $category->detail }}</p>
                     </div>
                     <div class="card-footer">
-                        <a href="{{ route('ViewAllProduct', $category->id) }}" class="btn btn-dark">View All</a>
+                        <a href="{{ route('ViewAllProduct', $category->id) }}" class="btn btn-outline-dark">View All</a>
                     </div>
                 </div>
             @endforeach
