@@ -1,0 +1,8 @@
+.image-product {
+    width: 150px;
+    height: 150px;
+}
+
+.table-order-id tbody tr td {
+    text-transform: capitalize;
+}

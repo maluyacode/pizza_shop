@@ -9,14 +9,18 @@ $(document).on('click', '.view-order', function () {
         },
         success: function (data) {
             let table = $('.order-products').children('tbody')
+            table.empty();
             $.each(data.orders.products, function (i, value) {
-                table.append($('<tr>').html(value.id))
-                table.append($('<tr>').html(
-                    $('<img>').attr({ "src": value.media[0]?.original_url })
+                let tr = $('<tr>');
+                tr.append($('<td>').html(value.id))
+                tr.append($('<td>').html(
+                    $('<img>').attr({ "src": value.media[0]?.original_url }).addClass('image-product')
                 ))
-                table.append($('<tr>').html(value.name))
-                table.append($('<tr>').html(value.pivot.quantity))
+                tr.append($('<td>').html(value.name))
+                tr.append($('<td>').html(value.pivot.quantity))
+                table.append(tr);
             });
+
         },
         error: function (error) {
             alert("Sorry antok na developer")

@@ -1,6 +1,7 @@
 @extends('layouts.app')
 @section('styles')
     <link rel="stylesheet" href="{{ asset('css/home.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/order-user.css') }}">
 @endsection
 {{-- {{ dd($categories) }} --}}
 @php
@@ -12,7 +13,7 @@
             <h1>Your Orders</h1>
         </div>
         <div class="row justify-content-center">
-            <table class="table table-striped">
+            <table class="table table-striped table-order-id">
                 <thead>
                     <tr>
                         <th scope="col">Order ID</th>
@@ -57,7 +58,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="orderModalLabel">Order Details</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <button type="button" class="close btn btn-outline-danger" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
