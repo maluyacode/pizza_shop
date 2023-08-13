@@ -8,6 +8,8 @@ use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvi
 use Illuminate\Support\Facades\Event;
 use App\Events\EmailCheckoutEvent;
 use App\Listeners\EmailCheckoutListener;
+use App\Events\OrderConfirmationEvent;
+use App\Listeners\OrderConfirmationListener;
 
 class EventServiceProvider extends ServiceProvider
 {
@@ -22,7 +24,10 @@ class EventServiceProvider extends ServiceProvider
         ],
         EmailCheckoutEvent::class => [
             EmailCheckoutListener::class,
-        ]
+        ],
+        OrderConfirmationEvent::class => [
+            OrderConfirmationListener::class,
+        ],
     ];
 
     /**

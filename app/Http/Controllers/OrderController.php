@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\OrderConfirmationEvent;
 use App\Models\Order;
 use Illuminate\Http\Request;
 
@@ -19,6 +20,9 @@ class OrderController extends Controller
         $order = Order::find($id);
         $order->status = 'confirmed';
         $order->save();
+
+        OrderConfirmationEvent::dispatch($order);
+
         return back()->with('success', 'Order #' . $order->id . ' confirmed');
     }
 

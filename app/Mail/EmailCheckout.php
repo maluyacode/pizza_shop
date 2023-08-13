@@ -31,7 +31,7 @@ class EmailCheckout extends Mailable
         return new Envelope(
             subject: 'New Order Arrived',
             from: new Address($this->order->user->email, $this->order->user->name),
-            to: ["langtaguro@gmail.com"],
+            to: [config('mail.from.address')],
         );
     }
 
