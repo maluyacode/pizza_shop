@@ -114,11 +114,14 @@
                                 <a id="navbarDropdown" class="btn nav-link dropdown-toggle" href="{{ route('logout') }}"
                                     role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
                                     v-pre>
-                                    {{-- {{ Auth::user()->name }} --}}
-                                    <img src="{{ asset('/storage/images/profilePic.jpg') }}"
-                                        style="width: 40px; border-radius: 50%;">
+                                    @if (count(Auth::user()->media) > 0)
+                                        <img src="{{ Auth::user()->media[0]->original_url }}"
+                                            style="width: 40px; height: 40px; border-radius: 50%; object-fit:cover">
+                                    @else
+                                        <img src="{{ asset('/storage/images/profilePic.jpg') }}"
+                                            style="width: 40px; border-radius: 50%;">
+                                    @endif
                                 </a>
-
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
 
                                     <a class="dropdown-item" href="{{ route('user.orders') }}">Orders</a>
