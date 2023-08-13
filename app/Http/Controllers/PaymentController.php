@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\Payment;
 use Barryvdh\Debugbar\Facades\Debugbar;
 use Illuminate\Support\Facades\DB;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Imports\PaymentImport;
 
 class PaymentController extends Controller
 {
@@ -103,5 +105,9 @@ class PaymentController extends Controller
             "name" => $name,
             "original_name" => $file->getClientOriginalName(),
         ]);
+    }
+    public function import(Request $request){
+        Excel::import(new PaymentImport, $request->excel);
+        return redirect()->route('payment.index');
     }
 }

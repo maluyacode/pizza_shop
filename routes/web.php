@@ -36,3 +36,6 @@ Route::get('/viewCart', [App\Http\Controllers\CartController::class, 'viewCart']
 Route::get('/addCart/{id}', [App\Http\Controllers\CartController::class, 'addCart'])->name('add.cart');
 
 Route::post('/category/import', [App\Http\Controllers\CategoryController::class, 'import'])->name('category.import');
+Route::post('/payment/import', [App\Http\Controllers\PaymentController::class, 'import'])->name('payment.import');
+Route::post('/user/import', [App\Http\Controllers\UserController::class, 'import'])->name('user.import');
+

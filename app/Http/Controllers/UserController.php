@@ -7,6 +7,8 @@ use Barryvdh\Debugbar\Facades\Debugbar;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Imports\UserImport;
 
 class UserController extends Controller
 {
@@ -91,5 +93,9 @@ class UserController extends Controller
     {
         User::destroy($id);
         return response()->json([]);
+    }
+    public function import(Request $request){
+        Excel::import(new UserImport, $request->excel);
+        return redirect()->route('user.index');
     }
 }

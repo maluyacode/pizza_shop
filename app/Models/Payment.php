@@ -13,6 +13,8 @@ class Payment extends Model implements HasMedia
     use HasFactory;
     use InteractsWithMedia;
 
+    protected $fillable =['name','description'];
+    
     public function registerMediaConversions(Media $media = null): void
     {
         $this->addMediaConversion('thumb')

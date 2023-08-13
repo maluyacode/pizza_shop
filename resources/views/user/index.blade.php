@@ -13,6 +13,11 @@
 
 @section('content')
     <div class="container">
+        <form action="{{route('user.import')}}" method="post" enctype="multipart/form-data">
+            @csrf
+            <input type="file" id="uploadName" class="form-control" name="excel" required>
+            <button type="submit" class="btn btn-info btn-primary">Import Excel File</button>
+        </form>
         <table id="user-table">
             <thead>
                 <tr>
