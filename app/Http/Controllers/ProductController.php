@@ -139,21 +139,4 @@ class ProductController extends Controller
         Excel::import(new ProductImport, $request->excel);
         return redirect()->route('product.index');
     }
-
-    public function bestSeller()
-    {
-        $products = Product::with(['orders'])->get();
-
-        $bestSellers = [];
-
-        foreach ($products as $product) {
-            $quantity = 0;
-            foreach ($product->orders as $order) {
-                $quantity += $order->pivot->quantity;
-            }
-            $bestSellers[$product->name] = $quantity;
-        }
-
-        return response()->json($bestSellers);
-    }
 }

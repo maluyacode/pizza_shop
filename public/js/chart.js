@@ -1,6 +1,6 @@
 $(function () {
     $.ajax({
-        url: `/api/`,
+        url: `/api/bestSeller`,
         type: "GET",
         headers: {
             "X-CSRF-TOKEN": $('meta[name="csrf-tokens"]').attr("content"),
