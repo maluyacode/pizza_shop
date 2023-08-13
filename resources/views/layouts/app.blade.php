@@ -85,6 +85,7 @@
                                     <a class="dropdown-item" href="{{ url('/category') }}">Manage Category</a>
                                     <a class="dropdown-item" href="{{ route('user.index') }}">Manage User</a>
                                     <a class="dropdown-item" href="{{ route('payment.index') }}">Manage Payment</a>
+                                    <a class="dropdown-item" href="{{ route('order.index') }}">Manage Order</a>
                                 </div>
                             </div>
                             <li class="nav-item dropdown">
