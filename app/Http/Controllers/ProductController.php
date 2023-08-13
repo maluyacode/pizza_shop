@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Imports\ProductImport;
+use App\Models\Payment;
 
 class ProductController extends Controller
 {
@@ -140,5 +141,16 @@ class ProductController extends Controller
         return redirect()->route('product.index');
     }
 
+    public function mostPaymentMethod()
+    {
+        $payments = Payment::with(['orders'])->get();
 
+        $mostChoosePayment = [];
+
+        foreach ($payments as $payment) {
+            $mostChoosePayment[$payment->name] = count($payment->orders);
+        }
+
+        return response()->json($mostChoosePayment);
+    }
 }
