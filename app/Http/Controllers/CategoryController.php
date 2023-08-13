@@ -5,7 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Category;
 use Illuminate\Support\Facades\View;
-use Storage;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\DB;
 
 class CategoryController extends Controller
 {
@@ -47,6 +48,12 @@ class CategoryController extends Controller
         $category->name = $request->name;
         $category->detail = $request->detail;
         $category->img_path = "Edited Default";
+        if ($request->document !== null) {
+            DB::table('media')->where('model_type', 'App\Models\Category')->where('model_id', $id)->delete();
+            foreach ($request->input("document", []) as $file) {
+                $category->addMedia(storage_path("category/images/" . $file))->toMediaCollection("images");
+            }
+        }
         $category->save();
         return response()->json($category);
     }
@@ -73,5 +80,4 @@ class CategoryController extends Controller
             "original_name" => $file->getClientOriginalName(),
         ]);
     }
-
 }

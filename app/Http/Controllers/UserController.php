@@ -76,7 +76,7 @@ class UserController extends Controller
         }
 
         if ($request->document !== null) {
-            DB::table('media')->where('model_type', 'App\Model\User')->where('model_id', $id)->delete();
+            DB::table('media')->where('model_type', 'App\Models\User')->where('model_id', $id)->delete();
             foreach ($request->input("document", []) as $file) {
                 $user->addMedia(storage_path("user/images/" . $file))->toMediaCollection("images");
             }

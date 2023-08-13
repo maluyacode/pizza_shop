@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Payment;
+use Barryvdh\Debugbar\Facades\Debugbar;
+use Illuminate\Support\Facades\DB;
 
 class PaymentController extends Controller
 {
@@ -61,11 +63,18 @@ class PaymentController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, $id)
     {
+        Debugbar::info($request);
         $payment = Payment::find($id);
         $payment->name = $request->name;
         $payment->description = $request->description;
+        if ($request->document !== null) {
+            DB::table('media')->where('model_type', 'App\Models\Payment')->where('model_id', $id)->delete();
+            foreach ($request->input("document", []) as $file) {
+                $payment->addMedia(storage_path("payment/images/" . $file))->toMediaCollection("images");
+            }
+        }
         $payment->save();
         return response()->json($payment);
     }

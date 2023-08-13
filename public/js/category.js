@@ -53,16 +53,16 @@ $(function () {
 });
 
 $(document).on("click", "#create", function (e) {
-    $("#ldetail").show();
-    $("#dropzone-image").show();
+    // $("#ldetail").show();
+    // $("#dropzone-image").show();
     $("#categoryForm").trigger("reset");
     $("#update").hide();
     $("#save").show();
 });
 
 $(document).on("click", ".edit", function (e) {
-    $("#ldetail").hide();
-    $("#dropzone-image").hide();
+    // $("#ldetail").hide();
+    // $("#dropzone-image").hide();
     let id = $(this).attr("data-id");
     $("#categoryForm").trigger("reset");
     $("#update").show();
@@ -103,6 +103,13 @@ $("#save").on("click", function (e) {
             },
             dataType: "json",
             success: function (data) {
+
+                $('.dz-preview').remove()
+                $('.dz-message').css({
+                    display: "block",
+                })
+                $('input[name="document[]"]').remove();
+
                 $("#close").trigger("click");
                 table.ajax.reload();
                 alert("Category Added")
@@ -114,30 +121,37 @@ $("#save").on("click", function (e) {
 
 $("#update").on('click', function () {
     if ($("#categoryForm").valid()) {
-    let id = $(this).attr("data-id");
-    let formData = new FormData($('#categoryForm')[0]);
-    for (var pair of formData.entries()) {
-        console.log(pair[0] + ', ' + pair[1]);
+        let id = $(this).attr("data-id");
+        let formData = new FormData($('#categoryForm')[0]);
+        for (var pair of formData.entries()) {
+            console.log(pair[0] + ', ' + pair[1]);
+        }
+        formData.append('_method', 'PUT');
+        $.ajax({
+            url: `/api/category/${id}`,
+            type: 'POST',
+            data: formData,
+            contentType: false,
+            processData: false,
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            dataType: "json",
+            success: function (data) {
+
+                $('.dz-preview').remove()
+                $('.dz-message').css({
+                    display: "block",
+                })
+                $('input[name="document[]"]').remove();
+
+                $("#close").trigger("click");
+                table.ajax.reload();
+                alert("Category Edited")
+            },
+            error: function (error) { },
+        })
     }
-    formData.append('_method', 'PUT');
-    $.ajax({
-        url: `/api/category/${id}`,
-        type: 'POST',
-        data: formData,
-        contentType: false,
-        processData: false,
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        },
-        dataType: "json",
-        success: function (data) {
-            $("#close").trigger("click");
-            table.ajax.reload();
-            alert("Category Edited")
-        },
-        error: function (error) { },
-    })
-}
 });
 
 $(document).on("click", ".delete", function (e) {

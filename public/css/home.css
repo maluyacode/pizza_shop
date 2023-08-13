@@ -9,7 +9,7 @@
 .card-img-top {
     max-height: 300px;
     min-height: 300px;
-    object-fit: cover;
+    object-fit:contain;
 }
 
 .title h1 {

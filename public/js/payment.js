@@ -54,16 +54,16 @@ $(function () {
 });
 
 $(document).on("click", "#create", function (e) {
-    $("#detail").show();
-    $("#dropzone-image").show();
+    // $("#detail").show();
+    // $("#dropzone-image").show();
     $("#paymentForm").trigger("reset");
     $("#update").hide();
     $("#save").show();
 });
 
 $(document).on("click", ".edit", function (e) {
-    $("#detail").hide();
-    $("#dropzone-image").hide();
+    // $("#detail").hide();
+    // $("#dropzone-image").hide();
     let id = $(this).attr("data-id");
     $("#paymentForm").trigger("reset");
     $("#update").show();
@@ -92,9 +92,9 @@ $(document).on("click", ".edit", function (e) {
 $("#save").on("click", function (e) {
     if ($("#paymentForm").valid()) {
         let formData = new FormData($("#paymentForm")[0]);
-    for (var pair of formData.entries()) {
-        console.log(pair[0] + ", " + pair[1]);
-    }
+        for (var pair of formData.entries()) {
+            console.log(pair[0] + ", " + pair[1]);
+        }
         $.ajax({
             url: "/api/payment",
             type: "POST",
@@ -106,7 +106,11 @@ $("#save").on("click", function (e) {
             },
             dataType: "json",
             success: function (data) {
-                // $("#modalCategory").modal("hide");
+                $('.dz-preview').remove()
+                $('.dz-message').css({
+                    display: "block",
+                })
+                $('input[name="document[]"]').remove();
                 $("#close").trigger("click");
                 table.ajax.reload();
                 alert("Payment Added")
@@ -118,30 +122,35 @@ $("#save").on("click", function (e) {
 
 $("#update").on('click', function () {
     if ($("#paymentForm").valid()) {
-    let id = $(this).attr("data-id");
-    let formData = new FormData($('#paymentForm')[0]);
-    for (var pair of formData.entries()) {
-        console.log(pair[0] + ', ' + pair[1]);
+        let id = $(this).attr("data-id");
+        let formData = new FormData($('#paymentForm')[0]);
+        for (var pair of formData.entries()) {
+            console.log(pair[0] + ', ' + pair[1]);
+        }
+        formData.append('_method', 'PUT');
+        $.ajax({
+            url: `/api/payment/${id}`,
+            type: 'POST',
+            data: formData,
+            contentType: false,
+            processData: false,
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            dataType: "json",
+            success: function (data) {
+                $('.dz-preview').remove()
+                $('.dz-message').css({
+                    display: "block",
+                })
+                $('input[name="document[]"]').remove();
+                $("#close").trigger("click");
+                table.ajax.reload();
+                alert("Payment Edited")
+            },
+            error: function (error) { },
+        })
     }
-    formData.append('_method', 'PUT');
-    $.ajax({
-        url: `/api/payment/${id}`,
-        type: 'POST',
-        data: formData,
-        contentType: false,
-        processData: false,
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        },
-        dataType: "json",
-        success: function (data) {
-            $("#close").trigger("click");
-            table.ajax.reload();
-            alert("Payment Edited")
-        },
-        error: function (error) { },
-    })
-}
 });
 
 $(document).on("click", ".delete", function (e) {

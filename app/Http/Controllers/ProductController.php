@@ -40,7 +40,7 @@ class ProductController extends Controller
         $product->category_id = $request->category_id;
         $product->img_path = 'Wala na po';
         if ($request->document !== null) {
-            DB::table('media')->where('model_type', 'App\Model\Product')->where('model_id', $id)->delete();
+            DB::table('media')->where('model_type', 'App\Models\Product')->where('model_id', $id)->delete();
             foreach ($request->input("document", []) as $file) {
                 $product->addMedia(storage_path("product/images/" . $file))->toMediaCollection("images");
             }
