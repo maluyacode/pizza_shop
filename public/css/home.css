@@ -9,7 +9,7 @@
 .card-img-top {
     max-height: 300px;
     min-height: 300px;
-    object-fit:contain;
+    object-fit: contain;
 }
 
 .title h1 {
@@ -20,4 +20,8 @@
     width: 30%;
     margin-bottom: 20px;
 
+}
+
+.row-best-sellers{
+    margin-bottom: 80px;
 }

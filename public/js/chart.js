@@ -1,3 +1,7 @@
+Chart.defaults.backgroundColor = '#9BD0F5';
+Chart.defaults.font.size = 16;
+Chart.defaults.color = '#000';
+
 $(function () {
     $.ajax({
         url: `/api/bestSeller`,
@@ -57,7 +61,7 @@ function OrderCount(data) {
             labels: Object.keys(data),
             datasets: [
                 {
-                    label: "# of Order Count",
+                    label: "Number of Sold Products",
                     data: Object.values(data),
                     backgroundColor: "rgba(75, 192, 192, 0.3)",
                     borderColor: "rgba(75, 192, 192, 1)",
@@ -66,6 +70,7 @@ function OrderCount(data) {
             ],
         },
         options: {
+            indexAxis: 'y',
             scales: {
                 y: {
                     beginAtZero: true,
@@ -93,6 +98,12 @@ function categoriesProduct(data) {
             ],
         },
         options: {
+            plugins: {
+                title: {
+                    display: true,
+                    text: 'Number of products per cateogory'
+                }
+            },
             scales: {
                 y: {
                     beginAtZero: true,
@@ -120,6 +131,12 @@ function mostPaymentMethod(data) {
             ],
         },
         options: {
+            plugins: {
+                title: {
+                    display: true,
+                    text: 'Most used payment method'
+                }
+            },
             scales: {
                 y: {
                     beginAtZero: true,
