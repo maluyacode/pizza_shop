@@ -27,6 +27,7 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\FrontEndController::class, 'categories'])->name('home');
 Route::get('/product/{id}/all', [App\Http\Controllers\FrontEndController::class, 'ViewAllProduct'])->name('ViewAllProduct');
 Route::get('/product/{id}/details', [App\Http\Controllers\FrontEndController::class, 'product'])->name('product.details');
+Route::get('/search', [App\Http\Controllers\SearchController::class, 'search'])->name('search');
 
 Route::middleware(['auth'])->group(function () {
     Route::view('/category', 'category.index')->name('category.index');

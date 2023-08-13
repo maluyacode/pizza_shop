@@ -24,3 +24,21 @@ $(function () {
 
 
 })
+$.ajax({
+    url: `/api/search/data`,
+    type: "get",
+    headers: {
+        "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+    },
+    dataType: "json",
+    success: function (data) {
+        let dataSrc = $.merge(data.products, data.categories);
+        console.log(dataSrc);
+        $("#tags").autocomplete({
+            source: dataSrc
+        });
+    },
+    error: function (error) {
+        alert(error);
+    },
+});

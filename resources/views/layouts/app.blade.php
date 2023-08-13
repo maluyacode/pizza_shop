@@ -29,6 +29,9 @@
     <script src="https://unpkg.com/dropzone@5/dist/min/dropzone.min.js"></script>
     <link rel="stylesheet" href="https://unpkg.com/dropzone@5/dist/min/dropzone.min.css" type="text/css" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="{{ asset('css/header.css') }}">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
 </head>
 
 <body>
@@ -67,6 +70,16 @@
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ms-auto" style="gap: 10px; align-items:center">
                         <!-- Authentication Links -->
+                        <li class="nav-item search-item">
+                            <form action="{{ route('search') }}" method="GET" class="form-inline search-form">
+                                @csrf
+                                <div class="form-group ui-widget">
+                                    <input type="text" class="form-control" placeholder="Enter terms ex. pizza"
+                                        name="term" id="tags">
+                                </div>
+                                <button type="submit" class="btn btn-outline-secondary">Search</button>
+                            </form>
+                        </li>
                         @guest
                             @if (Route::has('login'))
                                 <li class="nav-item">

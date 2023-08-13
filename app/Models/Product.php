@@ -7,8 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
+use Spatie\Searchable\Searchable;
+use Spatie\Searchable\SearchResult;
 
-class Product extends Model implements HasMedia
+class Product extends Model implements HasMedia, Searchable
 {
     use HasFactory;
     use InteractsWithMedia;
@@ -35,5 +37,16 @@ class Product extends Model implements HasMedia
             ->width(200)
             ->height(200)
             ->sharpen(10);
+    }
+
+    public function getSearchResult(): SearchResult
+    {
+        $url = route('product.details', $this->id);
+
+        return new SearchResult(
+            $this,
+            $this->name,
+            $url
+        );
     }
 }

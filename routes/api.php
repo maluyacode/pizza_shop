@@ -18,6 +18,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+Route::get('/search/data', [App\Http\Controllers\SearchController::class, 'searchData']);
 Route::resource('category', App\Http\Controllers\CategoryController::class);
 
 Route::middleware(['auth'])->group(function () {
