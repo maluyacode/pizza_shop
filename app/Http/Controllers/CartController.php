@@ -10,6 +10,11 @@ class CartController extends Controller
 {
     public function addCart($id)
     {
+        $cart = Session::get('cart', []);
+
+        if (array_key_exists($id, $cart)) {
+            return back()->with('warning', 'The product exist in your cart');
+        }
 
         $product = Product::find($id);
 
@@ -19,13 +24,12 @@ class CartController extends Controller
             'product_price' => $product->price,
         ];
 
-        $cart = Session::get('cart') || null;
+        $cart[$id] = $producsCart;
 
-        if ($cart) {
-        }
+        Session::put('cart', $cart);
+        Session::save();
 
-        if (!$cart) {
-
-        }
+        return back()->with('success', 'Successfully added to cart, you may check you cart and edit.');
     }
+
 }

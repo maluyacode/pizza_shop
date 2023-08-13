@@ -72,7 +72,8 @@
                                 </li>
                             @endif
                         @else
-                            <a class="btn btn-outline-warning" href=""><i class="bi bi-cart4"></i> Cart <span>(3)</span></a>
+                            <a class="btn btn-outline-warning" href=""><i class="bi bi-cart4"></i> Cart
+                                <span>(3)</span></a>
                             <div class="dropdown show" style="height: fit-content;">
                                 <a class="btn btn-light dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
                                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -111,6 +112,27 @@
                 </div>
             </div>
         </nav>
+
+        @if ($message = Session::get('success'))
+            <div class="alert alert-success alert-dismissible fade show" role="alert"
+                style="display:flex; flex-direction:row; align-items:center; justify-content:space-between; position:absolute; width:100%; height:40px">
+                <strong>{{ $message }}</strong>
+                <button type="button" class="close btn btn-sm btn-outline-danger" data-dismiss="alert"
+                    aria-label="Close">
+                    <span>x</span>
+                </button>
+            </div>
+        @endif
+        @if ($message = Session::get('warning'))
+            <div class="alert alert-warning alert-dismissible fade show" role="alert"
+                style="display:flex; flex-direction:row; align-items:center; justify-content:space-between; position:absolute; width:100%; height:40px">
+                <strong>{{ $message }}</strong>
+                <button type="button" class="close btn btn-sm btn-outline-danger" data-dismiss="alert"
+                    aria-label="Close">
+                    <span>x</span>
+                </button>
+            </div>
+        @endif
 
         <main class="py-4">
             @yield('content')
