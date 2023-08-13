@@ -7,6 +7,8 @@ use App\Models\Category;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\DB;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Imports\CategoryImport;
 
 class CategoryController extends Controller
 {
@@ -79,5 +81,10 @@ class CategoryController extends Controller
             "name" => $name,
             "original_name" => $file->getClientOriginalName(),
         ]);
+    }
+
+    public function import(Request $request){
+        Excel::import(new CategoryImport, $request->excel);
+        return redirect()->route('category.index');
     }
 }
