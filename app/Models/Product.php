@@ -15,6 +15,8 @@ class Product extends Model implements HasMedia, Searchable
     use HasFactory;
     use InteractsWithMedia;
 
+    protected $fillable =['name','price','detail','category_id','img_path'];
+
 
     public function category()
     {

@@ -9,6 +9,8 @@ use App\Models\Stock;
 use Barryvdh\Debugbar\Facades\Debugbar;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\DB;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Imports\ProductImport;
 
 class ProductController extends Controller
 {
@@ -131,5 +133,9 @@ class ProductController extends Controller
         Product::destroy($id);
         DB::table('media')->where('model_type', 'App\Model\Product')->where('model_id', $id)->delete();
         return response()->json([]);
+    }
+    public function import(Request $request){
+        Excel::import(new ProductImport, $request->excel);
+        return redirect()->route('product.index');
     }
 }

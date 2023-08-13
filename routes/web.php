@@ -60,4 +60,5 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/category/import', [App\Http\Controllers\CategoryController::class, 'import'])->name('category.import');
     Route::post('/payment/import', [App\Http\Controllers\PaymentController::class, 'import'])->name('payment.import');
     Route::post('/user/import', [App\Http\Controllers\UserController::class, 'import'])->name('user.import');
+    Route::post('/product/import', [App\Http\Controllers\ProductController::class, 'import'])->name('product.import');
 });
