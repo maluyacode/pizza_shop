@@ -34,6 +34,6 @@ class CartController extends Controller
 
     public function viewCart()
     {
-        dd("ASd");
+        Session::forget('cart');
     }
 }

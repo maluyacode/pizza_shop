@@ -73,7 +73,7 @@
                             @endif
                         @else
                             <a class="btn btn-outline-warning" href=""><i class="bi bi-cart4"></i> Cart
-                                <span>({{ count(Session::get('cart')) }})</span></a>
+                                <span>({{ Session::get('cart') ? count(Session::get('cart')) : 0 }})</span></a>
                             <div class="dropdown show" style="height: fit-content;">
                                 <a class="btn btn-light dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
                                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
