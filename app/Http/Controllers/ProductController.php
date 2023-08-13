@@ -139,4 +139,17 @@ class ProductController extends Controller
         Excel::import(new ProductImport, $request->excel);
         return redirect()->route('product.index');
     }
+
+    public function categoriesProduct()
+    {
+
+        $categories = Category::with(['products'])->get();
+
+        $categoriesProduct = [];
+        foreach ($categories as $category) {
+            $categoriesProduct[$category->name] = count($category->products);
+        }
+
+        return response()->json($categoriesProduct);
+    }
 }
