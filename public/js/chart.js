@@ -3,11 +3,11 @@ $(function () {
         url: `/api/bestSeller`,
         type: "GET",
         headers: {
-            "X-CSRF-TOKEN": $('meta[name="csrf-tokens"]').attr("content"),
+            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
         },
         dataType: "json",
         success: function (data) {
-            numBorrowBook(data);
+            OrderCount(data);
         },
         error: function (error) {
             alert(error);
@@ -17,7 +17,7 @@ $(function () {
 
 function OrderCount(data) {
     console.log(data);
-    const ctx = document.getElementById("myChart1");
+    const ctx = document.getElementById("Chart1");
     new Chart(ctx, {
         type: "bar",
         data: {
