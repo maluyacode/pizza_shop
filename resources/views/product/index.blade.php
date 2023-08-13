@@ -9,7 +9,6 @@
         href="https://cdn.datatables.net/responsive/2.2.9/css/responsive.dataTables.min.css">
     <script type="text/javascript" src="https://cdn.datatables.net/responsive/2.2.9/js/dataTables.responsive.min.js">
     </script>
-
 @endsection
 
 @section('content')
@@ -21,6 +20,7 @@
                     <th>Name</th>
                     <th>Category</th>
                     <th>Price</th>
+                    <th>Stock</th>
                     <th>Detail</th>
                     <th>Image</th>
                     <th>Action</th>
@@ -53,6 +53,11 @@
                             <label for="price">Product Price</label>
                             <input type="text" class="form-control" id="price" placeholder="Enter product price"
                                 name="price">
+                        </div>
+                        <div class="form-group">
+                            <label for="stock">Product Stock</label>
+                            <input type="text" class="form-control" id="stock" placeholder="Enter product stock"
+                                name="stock">
                         </div>
                         <div class="form-group">
                             <label for="category_id">Product Category</label>
@@ -141,5 +146,4 @@
     <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.6.5/js/buttons.bootstrap4.min.js"></script>
     <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
     <script src="{{ asset('js/product.js') }}"></script>
-
 @endsection

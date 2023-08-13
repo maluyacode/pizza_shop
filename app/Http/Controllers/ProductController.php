@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Models\Product;
+use App\Models\Stock;
 use Barryvdh\Debugbar\Facades\Debugbar;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\DB;
@@ -13,7 +14,7 @@ class ProductController extends Controller
 {
     public function index()
     {
-        $products = Product::with(['category', 'media'])->get();
+        $products = Product::with(['category', 'media', 'stock'])->get();
         return response()->json($products);
     }
 
@@ -32,13 +33,15 @@ class ProductController extends Controller
         //     'detail' => 'required',
         //     'img_path' => 'required'
         // ]);
-        Debugbar::info($request, $id);
-        $product = Product::find($id);
+        Debugbar::info($request);
+        // Debugbar::info($request, $id);
+        $product = Product::with(['stock'])->find($id);
         $product->name = $request->name;
         $product->price = $request->price;
         $product->detail = $request->detail;
         $product->category_id = $request->category_id;
         $product->img_path = 'Wala na po';
+
         if ($request->document !== null) {
             DB::table('media')->where('model_type', 'App\Models\Product')->where('model_id', $id)->delete();
             foreach ($request->input("document", []) as $file) {
@@ -46,6 +49,20 @@ class ProductController extends Controller
             }
         }
         $product->save();
+
+
+        $stock = Stock::where('product_id', $product->id)->first();
+        Debugbar::info($stock);
+
+        if (!$stock) {
+            $stock = new Stock;
+            $stock->product_id = $product->id;
+            $stock->quantity = $request->stock;
+            $stock->save();
+        } else {
+            $stock->quantity = $request->stock;
+            $stock->save();
+        }
 
         return response()->json($product);
     }
@@ -71,7 +88,7 @@ class ProductController extends Controller
     public function edit($id)
     {
         Debugbar::info($id);
-        $product = Product::with(['category'])->find($id);
+        $product = Product::with(['category', 'stock'])->find($id);
         $categories = Category::whereNotIn('id', [$product->category_id])->pluck('name', 'id');
 
         return response()->json(['product' => $product, 'categories' => $categories]);
@@ -92,12 +109,19 @@ class ProductController extends Controller
         $product->detail = $request->detail;
         $product->category_id = $request->category_id;
         $product->img_path = 'Wala na po';
+
         if ($request->document !== null) {
             foreach ($request->input("document", []) as $file) {
                 $product->addMedia(storage_path("product/images/" . $file))->toMediaCollection("images");
             }
         }
         $product->save();
+
+
+        $stock = new Stock;
+        $stock->product_id = $product->id;
+        $stock->quantity = $request->stock;
+        $stock->save();
 
         return response()->json($product);
     }

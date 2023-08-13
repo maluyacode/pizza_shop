@@ -52,3 +52,9 @@ table tbody tr td {
 .form-group{
     margin-bottom: 20px;
 }
+
+label.error
+{
+    color: red;
+    font-size: small;
+}

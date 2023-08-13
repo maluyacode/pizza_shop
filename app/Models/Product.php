@@ -19,6 +19,15 @@ class Product extends Model implements HasMedia
         return $this->belongsTo(Category::class, 'category_id', 'id');
     }
 
+    public function orders()
+    {
+        return $this->belongsToMany(Order::class)->withPivot('quantity');
+    }
+
+    public function stock()
+    {
+        return $this->hasOne(Stock::class, 'product_id', 'id');
+    }
 
     public function registerMediaConversions(Media $media = null): void
     {

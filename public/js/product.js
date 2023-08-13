@@ -30,6 +30,9 @@ let table = $('#product-table').DataTable({
             class: "price",
         },
         {
+            data: 'stock.quantity',
+        },
+        {
             data: 'detail',
             class: "detail",
         },
@@ -81,6 +84,10 @@ $(function () {
             detail: {
                 required: true,
                 minlength: 10,
+            },
+            stock: {
+                required: true,
+                number: true,
             },
         },
     })
@@ -192,6 +199,8 @@ $(document).on('click', '.edit', function () {
             $('#name').val(data.product.name)
             $('#price').val(data.product.price)
             $('#detail').val(data.product.detail)
+            $('#detail').val(data.product.detail)
+            $('#stock').val(data.product.stock.quantity)
 
             $.each(data.categories, function (index, value) {
                 $('#select-category').append($('<option>').attr({

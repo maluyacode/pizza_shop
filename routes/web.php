@@ -34,8 +34,12 @@ Route::view('/payment/index', 'payment.index')->name('payment.index');
 
 Route::get('/viewCart', [App\Http\Controllers\CartController::class, 'viewCart'])->name('view.cart');
 Route::get('/addCart/{id}', [App\Http\Controllers\CartController::class, 'addCart'])->name('add.cart');
+Route::get('/addQuantity/{id}', [App\Http\Controllers\CartController::class, 'addQuantity'])->name('addQuantity');
+Route::get('/subQuantity/{id}', [App\Http\Controllers\CartController::class, 'subQuantity'])->name('subQuantity');
+Route::get('/removeItem/{id}', [App\Http\Controllers\CartController::class, 'removeItem'])->name('removeItem');
+Route::get('/removeAll', [App\Http\Controllers\CartController::class, 'removeAll'])->name('removeAll');
+Route::post('/checkout', [App\Http\Controllers\CartController::class, 'checkout'])->name('checkout');
 
 Route::post('/category/import', [App\Http\Controllers\CategoryController::class, 'import'])->name('category.import');
 Route::post('/payment/import', [App\Http\Controllers\PaymentController::class, 'import'])->name('payment.import');
 Route::post('/user/import', [App\Http\Controllers\UserController::class, 'import'])->name('user.import');
-
