@@ -31,6 +31,22 @@ $(function () {
         },
     });
 });
+$(function () {
+    $.ajax({
+        url: `/api/most/payment`,
+        type: "GET",
+        headers: {
+            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+        },
+        dataType: "json",
+        success: function (data) {
+            mostPaymentMethod(data);
+        },
+        error: function (error) {
+            alert(error);
+        },
+    });
+});
 
 function OrderCount(data) {
     console.log(data);
@@ -83,6 +99,33 @@ function categoriesProduct(data) {
                     ticks: {
                         stepSize: 10,
                     },
+                },
+            },
+        },
+    });
+}
+function mostPaymentMethod(data) {
+    console.log(data);
+    const ctx = document.getElementById("Chart3");
+    new Chart(ctx, {
+        type: "doughnut",
+        data: {
+            labels: Object.keys(data),
+            datasets: [
+                {
+                    label: "Most Used Payment Methods",
+                    data: Object.values(data),
+                    borderWidth: 1,
+                },
+            ],
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    // ticks: {
+                    //     stepSize: 10,
+                    // },
                 },
             },
         },

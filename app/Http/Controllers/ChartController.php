@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\Category;
+use App\Models\Payment;
 
 class ChartController extends Controller
 {
@@ -40,5 +41,18 @@ class ChartController extends Controller
         }
 
         return response()->json($categoriesProduct);
+    }
+
+    public function mostPaymentMethod()
+    {
+        $payments = Payment::with(['orders'])->get();
+
+        $mostChoosePayment = [];
+
+        foreach ($payments as $payment) {
+            $mostChoosePayment[$payment->name] = count($payment->orders);
+        }
+
+        return response()->json($mostChoosePayment);
     }
 }
