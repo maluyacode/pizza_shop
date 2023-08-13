@@ -22,7 +22,11 @@
                         <p class="card-text">{{ $product->detail }}</p>
                     </div>
                     <div class="card-footer" style="display:flex;justify-content:space-between; ">
-                        <a href="{{ route('add.cart', $product->id) }}" class="btn btn-outline-success">Add to Cart</a>
+                        @if (array_key_exists($product->id, Session::get('cart', [])))
+                            <a href="{{ route('view.cart') }}" class="btn btn-outline-success">Go to Cart</a>
+                        @else
+                            <a href="{{ route('add.cart', $product->id) }}" class="btn btn-outline-success">Add to Cart</a>
+                        @endif
                         <a href="{{ route('product.details', $product->id) }}" class="btn btn-outline-dark">Quick View</a>
                     </div>
                 </div>

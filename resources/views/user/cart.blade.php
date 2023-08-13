@@ -90,9 +90,10 @@
                                     id="total-price">&#8369;{{ $total }}</span></h5>
                         </div>
                         <div class="card-footer bg-body-secondary border-dark">
-                            <a href="{{ route('removeAll') }}"style="float: left;" class="btn btn-outline-danger">Remove
+                            <a href="{{ route('removeAll') }}"style="float: left; {{ $cart == [] ? 'pointer-events: none' : '' }}"
+                                class="btn btn-outline-danger">Remove
                                 All</a>
-                            <button type="submit" id="checkout" style="float: right;"
+                            <button {{ $cart == [] ? 'disabled' : '' }}  type="submit" id="checkout" style="float: right;"
                                 class="btn btn-outline-success">Checkout</button>
                         </div>
                     </div>

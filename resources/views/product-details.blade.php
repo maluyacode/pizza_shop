@@ -33,7 +33,13 @@
                             </p>
                         </div>
                         <div class="card-footer">
-                            <button class="btn btn-outline-success" style="float: right">Add to Cart</button>
+                            @if (array_key_exists($product->id, Session::get('cart', [])))
+                                <a href="{{ route('view.cart') }}" class="btn btn-outline-success" style="float: right;">Go
+                                    to Cart</a>
+                            @else
+                                <a href="{{ route('add.cart', $product->id) }}" class="btn btn-outline-success"
+                                    style="float: right;">Add to Cart</a>
+                            @endif
                         </div>
                     </div>
                 </div>

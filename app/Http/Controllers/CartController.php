@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Order;
 use App\Models\Payment;
 use App\Models\Product;
+use App\Models\Stock;
 use Barryvdh\Debugbar\Facades\Debugbar;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
@@ -111,10 +112,14 @@ class CartController extends Controller
             $cart = Session::get('cart');
             foreach ($cart as $productId => $product) {
                 $order->products()->attach($productId, ['quantity' => $product["quantity"]]);
+
+                $stock = Stock::where('product_id', $productId)->first();
+                $stock->quantity = $stock->quantity - $product["quantity"];
+                $stock->save();
             }
         } catch (\Exception $e) {
             DB::rollBack();
-            dd($e);
+            return back()->with('warning', 'Add your product first');
         }
         Session::forget('cart');
         DB::commit();
