@@ -34,27 +34,26 @@ table tbody tr td {
     text-align: center;
 }
 
-.quantity{
+.quantity {
     width: 50px;
     text-align: center;
 }
 
-.checkout-card{
+.checkout-card {
     min-width: 350px !important;
 }
 
-.card-title{
+.card-title {
     margin-top: 20px;
     display: flex;
     justify-content: space-between;
 }
 
-.form-group{
+.form-cart {
     margin-bottom: 20px;
 }
 
-label.error
-{
+label.error {
     color: red;
     font-size: small;
 }

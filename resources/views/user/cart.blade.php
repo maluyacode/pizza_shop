@@ -69,14 +69,14 @@
                         <div class="card-header bg-body-secondary border-dark">Order Summary</div>
                         <div class="card-body">
 
-                            <div class="form-group">
+                            <div class="form-group form-cart">
                                 <label for="address">Delivery Address </label> <i class="bi bi-info-circle"
                                     data-toggle="tooltip" data-placement="top"
                                     title="If you leave this blank, we deliver it to your home address"></i>
                                 <input type="text" class="form-control" id="address"
                                     placeholder="Enter delivery address" name="address">
                             </div>
-                            <div class="form-group">
+                            <div class="form-group form-cart">
                                 <label for="address">Payment Method</label>
                                 <select class="form-control" id="payment" name="payment_id">
                                     <option value="">Select payment method</option>

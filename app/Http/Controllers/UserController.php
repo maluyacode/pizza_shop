@@ -9,6 +9,9 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Imports\UserImport;
+use App\Models\Order;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\View;
 
 class UserController extends Controller
 {
@@ -94,8 +97,29 @@ class UserController extends Controller
         User::destroy($id);
         return response()->json([]);
     }
-    public function import(Request $request){
+    public function import(Request $request)
+    {
         Excel::import(new UserImport, $request->excel);
         return redirect()->route('user.index');
+    }
+
+    public function profile()
+    {
+        return View::make('user.profile', [
+            'user' => Auth::user(),
+        ]);
+    }
+
+    public function orders()
+    {
+        return View::make('user.orders', [
+            'orders' => Order::with(['products'])->paginate(8),
+        ]);
+    }
+
+    public function vieworder($id)
+    {
+        // Debugbar::info($id);
+        return response()->json(['orders' => Order::with(['products.media', 'products'])->find($id)]);
     }
 }
