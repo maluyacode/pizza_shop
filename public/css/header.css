@@ -1,13 +1,13 @@
 .search-form {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    justify-content: center !important;
     width: inherit !important;
 }
 
 .search-form button {
-    margin-left: -69px;
+    margin-left: -69px !important;
 }
 
 .search-form .form-group {
@@ -15,7 +15,7 @@
 }
 
 .search-item {
-    width: 300px;
+    width: 300px !important;
 }
 
 .type {
@@ -26,6 +26,6 @@
 }
 
 .card-search {
-    margin-top: 10px;
-    margin-bottom: 10px;
+    margin-top: 10px !important;
+    margin-bottom: 10px !important;
 }

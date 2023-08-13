@@ -1,0 +1,14 @@
+.card-profile{
+    max-width: 500px;
+    min-width: 300px;
+}
+
+.list-group-item{
+    display: flex;
+    justify-content: space-between;
+}
+
+.list-group-item .bold{
+    font-weight: 600;
+}
+

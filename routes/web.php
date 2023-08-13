@@ -34,6 +34,9 @@ Route::middleware(['auth'])->group(function () {
     Route::view('/product/index', 'product.index')->name('product.index');
     Route::view('/user/index', 'user.index')->name('user.index');
     Route::view('/payment/index', 'payment.index')->name('payment.index');
+
+    Route::get('/profile', [App\Http\Controllers\UserController::class, 'profile'])->name('profile');
+    Route::get('/order/list', [App\Http\Controllers\UserController::class, 'orders'])->name('user.orders');
 });
 
 Route::middleware(['auth', 'authorize'])->group(function () {
