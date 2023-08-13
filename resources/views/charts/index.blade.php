@@ -11,6 +11,7 @@
     </div>
     <div class="row justify-content-center">
         <canvas id="Chart1"></canvas>
+        <canvas id="Chart2"></canvas>
     </div>
 </div>
 @endsection

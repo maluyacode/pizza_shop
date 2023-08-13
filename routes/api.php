@@ -30,6 +30,7 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/user/images', [App\Http\Controllers\UserController::class, 'storeMedia'])->name('user.storeMedia');
     Route::post('/payment/images', [App\Http\Controllers\PaymentController::class, 'storeMedia'])->name('payment.storeMedia');
     Route::get('/bestSeller', [App\Http\Controllers\ChartController::class, 'bestSeller']);
+    Route::get('/categories/product', [App\Http\Controllers\ChartController::class, 'categoriesProduct']);
     Route::get('/vieworder/{id}', [App\Http\Controllers\UserController::class, 'vieworder']);
 });
 
