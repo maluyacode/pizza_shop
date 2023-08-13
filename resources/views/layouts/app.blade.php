@@ -102,6 +102,7 @@
                                     Management
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                    <a class="dropdown-item" href="{{ route('chart') }}">Charts</a>
                                     <a class="dropdown-item" href="{{ route('product.index') }}">Manage Product</a>
                                     <a class="dropdown-item" href="{{ url('/category') }}">Manage Category</a>
                                     <a class="dropdown-item" href="{{ route('user.index') }}">Manage User</a>

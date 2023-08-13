@@ -6,5 +6,8 @@ use Illuminate\Http\Request;
 
 class ChartController extends Controller
 {
-    //
+    public function chart()
+    {
+        return view('charts.index');
+    }
 }
