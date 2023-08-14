@@ -284,6 +284,7 @@ $(document).on('click', '.delete', function () {
             },
             success: function () {
                 table.ajax.reload();
+                alert("Deleted Successfully")
             },
             error: function () {
 

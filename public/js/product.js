@@ -145,6 +145,9 @@ $('#save').on('click', function () {
             },
             dataType: "json",
             success: function (responseData) {
+
+                alert("Created successfully")
+
                 $('#productModal *').attr({
                     "disabled": false,
                 })
@@ -158,7 +161,7 @@ $('#save').on('click', function () {
                 $('#productForm').trigger("reset");
 
                 table.ajax.reload();
-                alert('Added successfully')
+                // alert('Added successfully')
 
             },
             error: function (responseError) {
@@ -239,6 +242,8 @@ $('#update').on('click', function () {
             },
             dataType: "json",
             success: function (responseData) {
+
+                // alert("Updated successfully")
                 $('#productModal *').attr({
                     "disabled": false,
                 })
@@ -277,6 +282,7 @@ $(document).on('click', '.delete', function () {
                 "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr('content'),
             },
             success: function () {
+                alert("Deleted successfully")
                 table.ajax.reload();
             },
             error: function () {

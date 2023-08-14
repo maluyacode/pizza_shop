@@ -17,7 +17,7 @@ class UserController extends Controller
 {
     public function index()
     {
-        return response()->json(User::with(['media'])->get());
+        return response()->json(User::with(['media'])->whereNot('id', Auth::user()->id)->get());
     }
 
     public function create()
